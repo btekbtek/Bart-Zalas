@@ -20,10 +20,11 @@
   box-sizing: border-box;
 }
 
+/* Same left edge as banner Shop Now / intro: clamp(2.4rem, 5vw, 7rem) */
 .gift-guide-grid__inner {
-  max-width: 120rem;
-  margin: 0 auto;
-  padding: 4rem 4rem 5rem;
+  max-width: none;
+  margin: 0;
+  padding: 4rem clamp(2.4rem, 5vw, 7rem) 5rem;
 }
 
 /* Desktop title */
@@ -34,19 +35,24 @@
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0;
+  text-align: left;
 }
 
 .gift-guide-grid__items {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 43.3rem);
   gap: 1.2rem;
+  justify-content: start;
 }
 
+/* Figma tile: 433 × 444, 1.5px black border */
 .gift-guide-grid__item {
   position: relative;
-  aspect-ratio: 1 / 1;
+  width: 43.3rem;
+  height: 44.4rem;
   overflow: hidden;
   background: #c4c4c4;
+  border: 0.15rem solid var(--gg-border);
 }
 
 .gift-guide-grid__image {
@@ -466,6 +472,12 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 0.4rem;
     padding: 0 0.4rem;
+  }
+
+  .gift-guide-grid__item {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 433 / 444;
   }
 
   .gift-guide-grid__hotspot {
