@@ -254,9 +254,9 @@
 .gift-guide-banner__intro {
   position: absolute;
   z-index: 2;
-  left: clamp(2.4rem, 4vw, 6rem);
+  left: clamp(2.4rem, 5vw, 7rem);
   right: auto;
-  bottom: clamp(3.2rem, 6%, 6.4rem);
+  bottom: clamp(3.2rem, 15%, 10.4rem);
   top: auto;
   max-width: min(52rem, 46%);
   transform: none;
@@ -278,8 +278,8 @@
 }
 
 .gift-guide-banner__description {
-  margin: 1.6rem 0 0;
-  max-width: 46rem;
+  margin: 3.6rem 0 0;
+  max-width: 49rem;
   font-family: var(--gg-font-sans);
   font-size: 2rem;
   font-weight: 400;
