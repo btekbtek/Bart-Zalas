@@ -1,0 +1,79 @@
+{
+  "layout": "gift-guide",
+  "sections": {
+    "gift_guide_banner": {
+      "type": "gift-guide-banner",
+      "settings": {
+        "logo_text": "TISSO VISON",
+        "tagline": "Find the ideal gift for your loved ones.",
+        "choose_gift_label": "CHOOSE GIFT",
+        "heading": "The Gift Guide",
+        "description": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+        "shop_now_label": "SHOP NOW",
+        "bottom_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+      }
+    },
+    "gift_guide_grid": {
+      "type": "gift-guide-grid",
+      "settings": {
+        "heading": "Tisso vison in the wild"
+      },
+      "blocks": {
+        "grid_item_1": {
+          "type": "grid_item",
+          "settings": {
+            "hotspot_x": 72,
+            "hotspot_y": 68
+          }
+        },
+        "grid_item_2": {
+          "type": "grid_item",
+          "settings": {
+            "hotspot_x": 45,
+            "hotspot_y": 35
+          }
+        },
+        "grid_item_3": {
+          "type": "grid_item",
+          "settings": {
+            "hotspot_x": 30,
+            "hotspot_y": 40
+          }
+        },
+        "grid_item_4": {
+          "type": "grid_item",
+          "settings": {
+            "hotspot_x": 55,
+            "hotspot_y": 30
+          }
+        },
+        "grid_item_5": {
+          "type": "grid_item",
+          "settings": {
+            "hotspot_x": 50,
+            "hotspot_y": 45
+          }
+        },
+        "grid_item_6": {
+          "type": "grid_item",
+          "settings": {
+            "hotspot_x": 40,
+            "hotspot_y": 35
+          }
+        }
+      },
+      "block_order": [
+        "grid_item_1",
+        "grid_item_2",
+        "grid_item_3",
+        "grid_item_4",
+        "grid_item_5",
+        "grid_item_6"
+      ]
+    }
+  },
+  "order": [
+    "gift_guide_banner",
+    "gift_guide_grid"
+  ]
+}
