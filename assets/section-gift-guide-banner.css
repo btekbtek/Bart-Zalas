@@ -258,13 +258,15 @@
 
 .gift-guide-banner__hero {
   position: relative;
-  /* Natural illustration height — avoid cover crop that centers busy art under the text */
   background: var(--gg-white);
   line-height: 0;
+  overflow: hidden;
 }
 
-.gift-guide-banner__hero picture {
-  display: block;
+/* Two stacked illustration layers — mirrors Figma */
+.gift-guide-banner__hero-stack {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -274,6 +276,10 @@
   height: auto;
   object-fit: contain;
   object-position: center top;
+}
+
+.gift-guide-banner__hero-bg--mobile {
+  display: none;
 }
 
 /* ── Bottom bar ── */
@@ -355,15 +361,14 @@
     justify-content: center;
   }
 
-  .gift-guide-banner__hero picture {
-    min-height: 0;
-    width: 100%;
+  .gift-guide-banner__hero-stack {
+    display: none;
   }
 
-  .gift-guide-banner__hero-bg {
-    min-height: 0;
+  .gift-guide-banner__hero-bg--mobile {
+    display: block;
+    width: 100%;
     height: auto;
-    object-fit: contain;
   }
 
   /* SHOP NOW overlays the illustration */
