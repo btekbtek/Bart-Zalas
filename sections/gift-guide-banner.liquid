@@ -7,7 +7,7 @@
   id="GiftGuideBanner-{{ section.id }}"
 >
   {%- liquid
-    assign logo_alt = section.settings.logo_text | default: 'STREETWEAR' | escape
+    assign logo_alt = section.settings.logo_text | default: 'TISSO VISION' | escape
     if section.settings.logo != blank
       assign logo_img = section.settings.logo | image_url: width: 304
     else
@@ -224,13 +224,13 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo image",
-      "info": "Defaults to STREETWEAR logo. Figma size: 151.44 × 19px."
+      "info": "Defaults to TISSO VISION logo. Figma size: 151.44 × 19px."
     },
     {
       "type": "text",
       "id": "logo_text",
       "label": "Logo alt text",
-      "default": "STREETWEAR"
+      "default": "TISSO VISION"
     },
     {
       "type": "url",

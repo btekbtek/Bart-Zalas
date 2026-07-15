@@ -68,20 +68,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 2.2rem;
+  height: 2.2rem;
   padding: 0;
   border: 0;
   border-radius: 50%;
   background: var(--gg-white);
   color: var(--gg-black);
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 300;
   line-height: 1;
   cursor: pointer;
   transform: translate(-50%, -50%);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.gift-guide-grid__hotspot.is-active {
+  font-size: 1.8rem;
 }
 
 .gift-guide-grid__hotspot:hover,
@@ -493,9 +497,9 @@
   }
 
   .gift-guide-grid__hotspot {
-    width: 2.8rem;
-    height: 2.8rem;
-    font-size: 1.8rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.6rem;
   }
 
   .gift-guide-grid__popup {

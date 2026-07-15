@@ -145,6 +145,7 @@
     this.messageEl = section.querySelector('[data-gift-guide-message]');
 
     this.product = null;
+    this.activeHotspot = null;
     this.optionIndexes = null;
     this.selectedColor = '';
     this.selectedSize = '';
@@ -175,7 +176,7 @@
         if (!productData) return;
 
         try {
-          self.openPopup(JSON.parse(productData));
+          self.openPopup(JSON.parse(productData), hotspot);
         } catch (error) {
           console.error('Invalid product data', error);
         }
@@ -242,14 +243,16 @@
 
   /**
    * @param {object} product
+   * @param {HTMLElement} [hotspot]
    */
-  GiftGuideGrid.prototype.openPopup = function (product) {
+  GiftGuideGrid.prototype.openPopup = function (product, hotspot) {
     this.product = product;
     this.optionIndexes = resolveOptionIndexes(product);
     this.selectedColor = '';
     this.selectedSize = '';
     this.closeSizeDropdown();
     this.clearMessage();
+    this.setActiveHotspot(hotspot || null);
 
     this.titleEl.textContent = product.title;
     this.priceEl.textContent = product.price_formatted || '';
@@ -274,11 +277,29 @@
 
   GiftGuideGrid.prototype.closePopup = function () {
     this.closeSizeDropdown();
+    this.clearActiveHotspot();
     this.overlay.classList.remove('is-open');
     this.overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     this.product = null;
     this.clearMessage();
+  };
+
+  GiftGuideGrid.prototype.setActiveHotspot = function (hotspot) {
+    this.clearActiveHotspot();
+    if (!hotspot) return;
+    this.activeHotspot = hotspot;
+    this.activeHotspot.classList.add('is-active');
+    this.activeHotspot.textContent = '−';
+    this.activeHotspot.setAttribute('aria-expanded', 'true');
+  };
+
+  GiftGuideGrid.prototype.clearActiveHotspot = function () {
+    if (!this.activeHotspot) return;
+    this.activeHotspot.classList.remove('is-active');
+    this.activeHotspot.textContent = '+';
+    this.activeHotspot.setAttribute('aria-expanded', 'false');
+    this.activeHotspot = null;
   };
 
   GiftGuideGrid.prototype.renderColorOptions = function () {
