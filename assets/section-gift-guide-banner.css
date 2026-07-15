@@ -145,7 +145,7 @@
   text-align: center;
 }
 
-/* ── Buttons (Figma: Jost Regular 16px, uppercase) ── */
+/* ── Buttons — Smart Animate: 300ms ease-out hover swap ── */
 .gift-guide-banner__btn {
   display: inline-flex;
   align-items: center;
@@ -162,18 +162,16 @@
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s ease;
+  transition:
+    background-color 300ms ease-out,
+    color 300ms ease-out,
+    transform 300ms ease-out;
 }
 
 .gift-guide-banner__btn-arrow {
   display: inline-block;
   font-weight: 300;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.gift-guide-banner__btn:hover,
-.gift-guide-banner__btn:focus-visible {
-  transform: translateY(-2px);
+  transition: transform 300ms ease-out;
 }
 
 .gift-guide-banner__btn:hover .gift-guide-banner__btn-arrow,
@@ -181,6 +179,7 @@
   transform: translateX(6px);
 }
 
+/* Top CTA: yellow → black on hover */
 .gift-guide-banner__btn--yellow {
   background: var(--gg-yellow);
   color: var(--gg-black);
@@ -188,9 +187,11 @@
 
 .gift-guide-banner__btn--yellow:hover,
 .gift-guide-banner__btn--yellow:focus-visible {
-  background: #ebe032;
+  background: var(--gg-black);
+  color: var(--gg-white);
 }
 
+/* Banner SHOP NOW: black → yellow on hover */
 .gift-guide-banner__btn--black {
   background: var(--gg-black);
   color: var(--gg-white);
@@ -198,7 +199,8 @@
 
 .gift-guide-banner__btn--black:hover,
 .gift-guide-banner__btn--black:focus-visible {
-  background: #222222;
+  background: var(--gg-yellow);
+  color: var(--gg-black);
 }
 
 .gift-guide-banner__btn--mobile-only {
@@ -209,29 +211,39 @@
 .gift-guide-banner__stage {
   position: relative;
   background: var(--gg-white);
+  overflow: hidden;
 }
 
+/* Figma: copy sits bottom-left over the illustration, not vertically centered */
 .gift-guide-banner__intro {
   position: absolute;
   z-index: 2;
-  top: 50%;
-  left: 4rem;
-  max-width: 48rem;
-  transform: translateY(-50%);
+  left: clamp(2.4rem, 4vw, 6rem);
+  right: auto;
+  bottom: clamp(3.2rem, 6%, 6.4rem);
+  top: auto;
+  max-width: min(52rem, 46%);
+  transform: none;
+  text-align: left;
+  pointer-events: none;
+}
+
+.gift-guide-banner__intro .gift-guide-banner__btn {
+  pointer-events: auto;
 }
 
 .gift-guide-banner__heading {
   margin: 0;
   font-family: var(--gg-font-sans);
-  font-size: 6.4rem;
+  font-size: clamp(4.8rem, 5vw, 7rem);
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
 }
 
 .gift-guide-banner__description {
-  margin: 2rem 0 0;
-  max-width: 42rem;
+  margin: 1.6rem 0 0;
+  max-width: 46rem;
   font-family: var(--gg-font-sans);
   font-size: 2rem;
   font-weight: 400;
@@ -246,25 +258,22 @@
 
 .gift-guide-banner__hero {
   position: relative;
-  min-height: 52rem;
-  overflow: hidden;
+  /* Natural illustration height — avoid cover crop that centers busy art under the text */
   background: var(--gg-white);
+  line-height: 0;
 }
 
 .gift-guide-banner__hero picture {
   display: block;
   width: 100%;
-  height: 100%;
-  min-height: 52rem;
 }
 
 .gift-guide-banner__hero-bg {
   display: block;
   width: 100%;
-  min-height: 52rem;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  object-fit: contain;
+  object-position: center top;
 }
 
 /* ── Bottom bar ── */
@@ -313,10 +322,13 @@
 
   .gift-guide-banner__intro {
     position: static;
+    left: auto;
+    bottom: auto;
     max-width: none;
     transform: none;
     padding: 3.2rem 2.4rem 1.6rem;
     text-align: center;
+    pointer-events: auto;
   }
 
   /* The Gift Guide — Jost Medium 70 / 100% */
@@ -365,7 +377,7 @@
 
   .gift-guide-banner__btn--mobile-only:hover,
   .gift-guide-banner__btn--mobile-only:focus-visible {
-    transform: translateX(-50%) translateY(-2px);
+    transform: translateX(-50%);
   }
 
   .gift-guide-banner__bottom-bar {

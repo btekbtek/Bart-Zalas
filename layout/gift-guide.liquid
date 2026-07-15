@@ -33,8 +33,15 @@
       };
     </script>
     <style>
+      /* Match Dawn rem scale so Figma px values (70 → 7rem, 20 → 2rem) stay correct */
+      html {
+        font-size: 62.5%;
+        -webkit-text-size-adjust: 100%;
+      }
+
       body.gift-guide-page {
         margin: 0;
+        font-size: 1.6rem;
         -webkit-font-smoothing: antialiased;
       }
     </style>
