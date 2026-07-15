@@ -209,7 +209,7 @@
   display: block;
   margin: 0 0 0.8rem;
   font-family: var(--gg-font-sans);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 400;
 }
 
@@ -243,8 +243,11 @@
   background-color: #fff;
   color: #000;
   font-family: var(--gg-font-sans);
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
   text-align: left;
   cursor: pointer;
   appearance: none;
@@ -315,8 +318,11 @@
   background: var(--gg-white);
   color: var(--gg-black);
   font-family: var(--gg-font-sans);
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
   text-align: left;
   cursor: pointer;
   appearance: none;
@@ -384,8 +390,11 @@
   background: var(--gg-white);
   color: var(--gg-black);
   font-family: var(--gg-font-sans);
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
   text-align: center;
   cursor: pointer;
   appearance: none;
