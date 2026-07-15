@@ -92,22 +92,16 @@
 
     <div class="gift-guide-banner__hero">
       {%- liquid
-        assign image_top = section.settings.background_image
-        assign image_bottom = section.settings.background_image_secondary
-        if image_bottom == blank
-          assign image_bottom = image_top
-        endif
+        assign image_desktop = section.settings.background_image
+        assign image_desktop_2 = section.settings.background_image_secondary
         assign image_mobile = section.settings.background_image_mobile
-        if image_mobile == blank
-          assign image_mobile = image_top
-        endif
       -%}
 
-      {%- comment -%} Desktop: two stacked illustration layers (same approach as Figma) {%- endcomment -%}
+      {%- comment -%} Desktop illustration (optional second layer if set in customizer) {%- endcomment -%}
       <div class="gift-guide-banner__hero-stack" aria-hidden="true">
-        {%- if image_top != blank -%}
+        {%- if image_desktop != blank -%}
           {{
-            image_top
+            image_desktop
             | image_url: width: 3840
             | image_tag:
               class: 'gift-guide-banner__hero-bg gift-guide-banner__hero-bg--desktop',
@@ -117,38 +111,32 @@
               sizes: '100vw',
               alt: ''
           }}
-          {{
-            image_bottom
-            | image_url: width: 3840
-            | image_tag:
-              class: 'gift-guide-banner__hero-bg gift-guide-banner__hero-bg--desktop',
-              loading: 'eager',
-              widths: '1100, 1500, 2000, 3000, 3840',
-              sizes: '100vw',
-              alt: ''
-          }}
+          {%- if image_desktop_2 != blank -%}
+            {{
+              image_desktop_2
+              | image_url: width: 3840
+              | image_tag:
+                class: 'gift-guide-banner__hero-bg gift-guide-banner__hero-bg--desktop',
+                loading: 'eager',
+                widths: '1100, 1500, 2000, 3000, 3840',
+                sizes: '100vw',
+                alt: ''
+            }}
+          {%- endif -%}
         {%- else -%}
           <img
             class="gift-guide-banner__hero-bg gift-guide-banner__hero-bg--desktop"
-            src="{{ 'gift-guide-banner-tile.jpg' | asset_url }}"
+            src="{{ 'gift-guide-banner.jpg' | asset_url }}"
             alt=""
-            width="890"
-            height="402"
+            width="1024"
+            height="554"
             loading="eager"
             fetchpriority="high"
-          >
-          <img
-            class="gift-guide-banner__hero-bg gift-guide-banner__hero-bg--desktop"
-            src="{{ 'gift-guide-banner-tile.jpg' | asset_url }}"
-            alt=""
-            width="890"
-            height="402"
-            loading="eager"
           >
         {%- endif -%}
       </div>
 
-      {%- comment -%} Mobile: single illustration {%- endcomment -%}
+      {%- comment -%} Mobile illustration {%- endcomment -%}
       {%- if image_mobile != blank -%}
         {{
           image_mobile
@@ -156,7 +144,7 @@
           | image_tag:
             class: 'gift-guide-banner__hero-bg gift-guide-banner__hero-bg--mobile',
             loading: 'eager',
-            widths: '750, 1100, 1500',
+            widths: '375, 750, 1100, 1500',
             sizes: '100vw',
             alt: section.settings.heading
         }}
@@ -165,8 +153,8 @@
           class="gift-guide-banner__hero-bg gift-guide-banner__hero-bg--mobile"
           src="{{ 'gift-guide-banner-mobile.jpg' | asset_url }}"
           alt="{{ section.settings.heading | escape }}"
-          width="890"
-          height="402"
+          width="375"
+          height="264"
           loading="eager"
         >
       {%- endif -%}
@@ -235,20 +223,20 @@
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Illustration layer 1 (top)",
-      "info": "Figma stacks two illustration images. Upload the first here."
+      "label": "Desktop illustration",
+      "info": "Defaults to theme asset if empty."
     },
     {
       "type": "image_picker",
       "id": "background_image_secondary",
-      "label": "Illustration layer 2 (bottom)",
-      "info": "Second Figma layer. Leave empty to repeat layer 1."
+      "label": "Desktop illustration (optional 2nd layer)",
+      "info": "Only use if Figma stacks a second desktop layer."
     },
     {
       "type": "image_picker",
       "id": "background_image_mobile",
-      "label": "Background illustration (mobile)",
-      "info": "Optional. Falls back to layer 1 or theme asset."
+      "label": "Mobile illustration",
+      "info": "Defaults to theme mobile asset if empty."
     },
     {
       "type": "text",
