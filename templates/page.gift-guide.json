@@ -48,24 +48,24 @@
           "type": "grid_item",
           "settings": {
             "product": "chequered-red-shirt",
-            "hotspot_x": 42,
-            "hotspot_y": 38
+            "hotspot_x": 64,
+            "hotspot_y": 22
           }
         },
         "grid_item_4": {
           "type": "grid_item",
           "settings": {
             "product": "classic-leather-jacket",
-            "hotspot_x": 55,
-            "hotspot_y": 28
+            "hotspot_x": 73,
+            "hotspot_y": 22
           }
         },
         "grid_item_5": {
           "type": "grid_item",
           "settings": {
             "product": "classic-varsity-top",
-            "hotspot_x": 58,
-            "hotspot_y": 40
+            "hotspot_x": 50,
+            "hotspot_y": 26
           }
         },
         "grid_item_6": {
