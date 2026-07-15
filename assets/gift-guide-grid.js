@@ -137,7 +137,10 @@
     this.colorGroup = section.querySelector('[data-gift-guide-color-group]');
     this.colorOptionsEl = section.querySelector('[data-gift-guide-color-options]');
     this.sizeGroup = section.querySelector('[data-gift-guide-size-group]');
-    this.sizeSelect = section.querySelector('[data-gift-guide-size-select]');
+    this.sizeDropdown = section.querySelector('[data-gift-guide-size-dropdown]');
+    this.sizeTrigger = section.querySelector('[data-gift-guide-size-trigger]');
+    this.sizeLabel = section.querySelector('[data-gift-guide-size-label]');
+    this.sizeList = section.querySelector('[data-gift-guide-size-list]');
     this.addBtn = section.querySelector('[data-gift-guide-add-btn]');
     this.messageEl = section.querySelector('[data-gift-guide-message]');
 
@@ -198,6 +201,43 @@
     this.addBtn.addEventListener('click', function () {
       self.handleAddToCart();
     });
+
+    if (this.sizeTrigger) {
+      this.sizeTrigger.addEventListener('click', function (event) {
+        event.stopPropagation();
+        self.toggleSizeDropdown();
+      });
+    }
+
+    document.addEventListener('click', function (event) {
+      if (!self.sizeDropdown || !self.sizeDropdown.classList.contains('is-open')) return;
+      if (!self.sizeDropdown.contains(event.target)) {
+        self.closeSizeDropdown();
+      }
+    });
+  };
+
+  GiftGuideGrid.prototype.toggleSizeDropdown = function () {
+    if (!this.sizeDropdown) return;
+    if (this.sizeDropdown.classList.contains('is-open')) {
+      this.closeSizeDropdown();
+    } else {
+      this.openSizeDropdown();
+    }
+  };
+
+  GiftGuideGrid.prototype.openSizeDropdown = function () {
+    if (!this.sizeDropdown) return;
+    this.sizeDropdown.classList.add('is-open');
+    this.sizeList.hidden = false;
+    this.sizeTrigger.setAttribute('aria-expanded', 'true');
+  };
+
+  GiftGuideGrid.prototype.closeSizeDropdown = function () {
+    if (!this.sizeDropdown) return;
+    this.sizeDropdown.classList.remove('is-open');
+    this.sizeList.hidden = true;
+    this.sizeTrigger.setAttribute('aria-expanded', 'false');
   };
 
   /**
@@ -208,6 +248,7 @@
     this.optionIndexes = resolveOptionIndexes(product);
     this.selectedColor = '';
     this.selectedSize = '';
+    this.closeSizeDropdown();
     this.clearMessage();
 
     this.titleEl.textContent = product.title;
@@ -232,6 +273,7 @@
   };
 
   GiftGuideGrid.prototype.closePopup = function () {
+    this.closeSizeDropdown();
     this.overlay.classList.remove('is-open');
     this.overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
@@ -257,6 +299,8 @@
       button.className = 'gift-guide-grid__color-btn';
       button.textContent = value;
       button.setAttribute('data-color-value', value);
+      /* Left strip uses the actual color name when selected (Blue → blue, Black → #000) */
+      button.style.setProperty('--swatch-color', self.resolveSwatchColor(value));
 
       if (index === 0) {
         button.classList.add('is-selected');
@@ -277,6 +321,27 @@
     });
   };
 
+  /**
+   * Maps variant color names to a CSS color for the selected swatch strip.
+   * @param {string} name
+   * @returns {string}
+   */
+  GiftGuideGrid.prototype.resolveSwatchColor = function (name) {
+    var key = String(name || '').toLowerCase().trim();
+    var map = {
+      blue: '#1a56db',
+      black: '#000000',
+      white: '#e8e8e8',
+      red: '#c62828',
+      green: '#2e7d32',
+      navy: '#1a237e',
+      grey: '#9e9e9e',
+      gray: '#9e9e9e',
+    };
+
+    return map[key] || key || '#1a56db';
+  };
+
   GiftGuideGrid.prototype.renderSizeOptions = function () {
     var self = this;
     var sizeOption = this.optionIndexes.sizeOption;
@@ -284,35 +349,64 @@
     if (!sizeOption || sizeOption.values.length === 0) {
       this.sizeGroup.hidden = true;
       this.selectedSize = '';
+      this.closeSizeDropdown();
       return;
     }
 
     this.sizeGroup.hidden = false;
-    this.sizeSelect.innerHTML = '';
-
-    var placeholder = document.createElement('option');
-    placeholder.value = '';
-    placeholder.textContent = 'Choose your size';
-    placeholder.disabled = true;
-    placeholder.selected = true;
-    this.sizeSelect.appendChild(placeholder);
+    this.selectedSize = '';
+    this.sizeLabel.textContent = 'Choose your size';
+    this.sizeList.innerHTML = '';
+    this.closeSizeDropdown();
 
     var availableSizes = sizeOption.values.filter(function (size) {
-      return findVariant(self.product.variants, self.optionIndexes.colorIndex, self.optionIndexes.sizeIndex, self.selectedColor, size);
+      return findVariant(
+        self.product.variants,
+        self.optionIndexes.colorIndex,
+        self.optionIndexes.sizeIndex,
+        self.selectedColor,
+        size
+      );
     });
 
     availableSizes.forEach(function (size) {
-      var option = document.createElement('option');
-      option.value = size;
-      option.textContent = size;
-      self.sizeSelect.appendChild(option);
+      var item = document.createElement('li');
+      item.setAttribute('role', 'none');
+
+      var optionBtn = document.createElement('button');
+      optionBtn.type = 'button';
+      optionBtn.className = 'gift-guide-grid__size-option';
+      optionBtn.setAttribute('role', 'option');
+      optionBtn.setAttribute('data-size-value', size);
+      optionBtn.textContent = size;
+
+      optionBtn.addEventListener('click', function (event) {
+        event.stopPropagation();
+        self.selectSize(size);
+      });
+
+      item.appendChild(optionBtn);
+      self.sizeList.appendChild(item);
+    });
+  };
+
+  /**
+   * @param {string} size
+   */
+  GiftGuideGrid.prototype.selectSize = function (size) {
+    var self = this;
+    this.selectedSize = size;
+    this.sizeLabel.textContent = size;
+
+    this.sizeList.querySelectorAll('.gift-guide-grid__size-option').forEach(function (btn) {
+      var isMatch = btn.getAttribute('data-size-value') === size;
+      btn.classList.toggle('is-selected', isMatch);
+      btn.setAttribute('aria-selected', isMatch ? 'true' : 'false');
     });
 
-    this.sizeSelect.onchange = function () {
-      self.selectedSize = self.sizeSelect.value;
-      self.updateAddButton();
-      self.clearMessage();
-    };
+    this.closeSizeDropdown();
+    this.updateAddButton();
+    this.clearMessage();
   };
 
   GiftGuideGrid.prototype.getSelectedVariant = function () {

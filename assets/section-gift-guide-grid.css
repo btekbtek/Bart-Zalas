@@ -202,29 +202,36 @@
 .gift-guide-grid__color-options {
   display: flex;
   gap: 0;
+  border: 1px solid var(--gg-border);
 }
 
 .gift-guide-grid__color-btn {
   flex: 1;
   position: relative;
-  padding: 1rem 1.2rem 1rem 1.6rem;
-  border: 1px solid var(--gg-border);
+  margin: 0;
+  padding: 1.2rem 1.2rem 1.2rem 2.4rem;
+  border: 0;
   border-radius: 0;
-  background: var(--gg-white);
+  background-color: var(--gg-white);
+  color: var(--gg-black);
   font-family: var(--gg-font-sans);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 400;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .gift-guide-grid__color-btn + .gift-guide-grid__color-btn {
-  border-left: 0;
+  border-left: 1px solid var(--gg-border);
 }
 
+/* Selected: white field + left color strip (never fill the whole button black) */
 .gift-guide-grid__color-btn.is-selected {
-  background: #f8f8f8;
+  background-color: var(--gg-white);
+  color: var(--gg-black);
 }
 
 .gift-guide-grid__color-btn.is-selected::before {
@@ -233,23 +240,119 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 4px;
-  background: var(--gg-blue);
+  width: 0.6rem;
+  background-color: var(--swatch-color, var(--gg-blue));
 }
 
-.gift-guide-grid__size-select {
+.gift-guide-grid__color-btn:focus-visible {
+  outline: 2px solid var(--gg-black);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.gift-guide-grid__size-dropdown {
+  position: relative;
   width: 100%;
-  padding: 1.2rem 3.6rem 1.2rem 1.2rem;
+}
+
+.gift-guide-grid__size-trigger {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 4.4rem;
+  padding: 0;
   border: 1px solid var(--gg-border);
   border-radius: 0;
-  background: var(--gg-white)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000' d='M1 1l5 5 5-5'/%3E%3C/svg%3E")
-    no-repeat right 1.2rem center;
+  background: var(--gg-white);
+  color: var(--gg-black);
   font-family: var(--gg-font-sans);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 400;
-  appearance: none;
+  text-align: left;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.gift-guide-grid__size-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 1.2rem 1.4rem;
+}
+
+.gift-guide-grid__size-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 4.4rem;
+  border-left: 1px solid var(--gg-border);
+}
+
+.gift-guide-grid__size-chevron::before {
+  content: '';
+  width: 0.8rem;
+  height: 0.8rem;
+  border-right: 1.5px solid var(--gg-black);
+  border-bottom: 1.5px solid var(--gg-black);
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform 200ms ease-out;
+}
+
+.gift-guide-grid__size-dropdown.is-open .gift-guide-grid__size-chevron::before {
+  transform: rotate(-135deg) translate(-1px, -1px);
+}
+
+.gift-guide-grid__size-list {
+  position: absolute;
+  z-index: 5;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--gg-border);
+  border-top: 0;
+  background: var(--gg-white);
+}
+
+.gift-guide-grid__size-list[hidden] {
+  display: none;
+}
+
+.gift-guide-grid__size-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 4.4rem;
+  padding: 1rem 1.2rem;
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid var(--gg-border);
+  background: var(--gg-white);
+  color: var(--gg-black);
+  font-family: var(--gg-font-sans);
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-align: center;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.gift-guide-grid__size-option:first-child {
+  border-top: 0;
+}
+
+.gift-guide-grid__size-option:hover,
+.gift-guide-grid__size-option:focus-visible,
+.gift-guide-grid__size-option.is-selected {
+  background: var(--gg-black);
+  color: var(--gg-white);
+  outline: none;
 }
 
 .gift-guide-grid__add-btn {

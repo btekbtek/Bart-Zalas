@@ -165,9 +165,25 @@
 
       <div class="gift-guide-grid__option-group" data-gift-guide-size-group hidden>
         <span class="gift-guide-grid__option-label">Size</span>
-        <select class="gift-guide-grid__size-select" data-gift-guide-size-select aria-label="Choose your size">
-          <option value="" disabled selected>Choose your size</option>
-        </select>
+        <div class="gift-guide-grid__size-dropdown" data-gift-guide-size-dropdown>
+          <button
+            type="button"
+            class="gift-guide-grid__size-trigger"
+            data-gift-guide-size-trigger
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-label="Choose your size"
+          >
+            <span class="gift-guide-grid__size-label" data-gift-guide-size-label>Choose your size</span>
+            <span class="gift-guide-grid__size-chevron" aria-hidden="true"></span>
+          </button>
+          <ul
+            class="gift-guide-grid__size-list"
+            data-gift-guide-size-list
+            role="listbox"
+            hidden
+          ></ul>
+        </div>
       </div>
 
       <button type="button" class="gift-guide-grid__add-btn" data-gift-guide-add-btn disabled>
