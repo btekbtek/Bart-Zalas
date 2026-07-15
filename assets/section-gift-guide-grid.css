@@ -233,7 +233,8 @@
 .gift-guide-grid__color-options {
   display: flex;
   gap: 0;
-  width: 100%;
+  width: 27.1rem;
+  max-width: 100%;
   border: 1px solid #000;
 }
 
@@ -244,7 +245,8 @@
   position: relative;
   margin: 0;
   padding: 0;
-  min-height: 4.4rem;
+  height: 6.448rem;
+  min-height: 6.448rem;
   border: 0;
   border-radius: 0;
   background: #fff;
@@ -310,16 +312,20 @@
   z-index: 1;
 }
 
+/* Figma size control: 271 × 64.48 */
 .gift-guide-grid__size-dropdown {
   position: relative;
-  width: 100%;
+  width: 27.1rem;
+  max-width: 100%;
 }
 
 .gift-guide-grid__size-trigger {
   display: flex;
   align-items: stretch;
+  box-sizing: border-box;
   width: 100%;
-  min-height: 4.4rem;
+  height: 6.448rem;
+  min-height: 6.448rem;
   padding: 0;
   border: 1px solid var(--gg-border);
   border-radius: 0;
@@ -349,7 +355,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 4.4rem;
+  width: 6.448rem;
   border-left: 1px solid var(--gg-border);
 }
 
@@ -390,7 +396,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 4.4rem;
+  min-height: 6.448rem;
   padding: 1rem 1.2rem;
   border: 0;
   border-radius: 0;
