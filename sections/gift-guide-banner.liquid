@@ -33,7 +33,7 @@
     </div>
   </header>
 
-  {%- comment -%} Mobile header {%- endcomment -%}
+  {%- comment -%} Mobile header — hamburger / close + centered logo {%- endcomment -%}
   <header class="gift-guide-banner__mobile-header">
     <button
       type="button"
@@ -42,59 +42,35 @@
       aria-label="Toggle menu"
       aria-expanded="false"
     >
-      <span></span>
-      <span></span>
-      <span></span>
+      <span class="gift-guide-banner__menu-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <span class="gift-guide-banner__close-icon" aria-hidden="true">×</span>
     </button>
     <p class="gift-guide-banner__mobile-logo">{{ section.settings.logo_text | escape }}</p>
   </header>
 
-  {%- comment -%} Hero area — customizer images, else bundled theme assets {%- endcomment -%}
-  <div class="gift-guide-banner__hero">
-    {%- if section.settings.background_image != blank -%}
-      <picture>
-        {%- if section.settings.background_image_mobile != blank -%}
-          <source
-            media="(max-width: 749px)"
-            srcset="{{ section.settings.background_image_mobile | image_url: width: 1500 }}"
-          >
-        {%- else -%}
-          <source
-            media="(max-width: 749px)"
-            srcset="{{ 'gift-guide-banner-mobile.jpg' | asset_url }}"
-          >
-        {%- endif -%}
-        {{
-          section.settings.background_image
-          | image_url: width: 3840
-          | image_tag:
-            class: 'gift-guide-banner__hero-bg',
-            loading: 'eager',
-            fetchpriority: 'high',
-            widths: '750, 1100, 1500, 2000, 3000, 3840',
-            sizes: '100vw',
-            alt: section.settings.background_image.alt | default: section.settings.heading
-        }}
-      </picture>
-    {%- else -%}
-      <picture>
-        <source
-          media="(max-width: 749px)"
-          srcset="{{ 'gift-guide-banner-mobile.jpg' | asset_url }}"
-        >
-        <img
-          class="gift-guide-banner__hero-bg"
-          src="{{ 'gift-guide-banner.jpg' | asset_url }}"
-          alt="{{ section.settings.heading | escape }}"
-          width="1024"
-          height="389"
-          loading="eager"
-          fetchpriority="high"
-        >
-      </picture>
+  {%- comment -%} Mobile CTA strip (tagline + yellow button) {%- endcomment -%}
+  <div class="gift-guide-banner__mobile-cta">
+    {%- if section.settings.tagline != blank -%}
+      <p class="gift-guide-banner__mobile-tagline">{{ section.settings.tagline | escape }}</p>
     {%- endif -%}
+    {%- if section.settings.choose_gift_label != blank -%}
+      <a
+        href="{{ section.settings.choose_gift_link | default: '#' }}"
+        class="gift-guide-banner__btn gift-guide-banner__btn--yellow"
+      >
+        <span>{{ section.settings.choose_gift_label | escape }}</span>
+        <span class="gift-guide-banner__btn-arrow" aria-hidden="true">→</span>
+      </a>
+    {%- endif -%}
+  </div>
 
-    <div class="gift-guide-banner__hero-content">
+  {%- comment -%} Stage: intro + illustration (desktop overlays copy on image) {%- endcomment -%}
+  <div class="gift-guide-banner__stage">
+    <div class="gift-guide-banner__intro">
       {%- if section.settings.heading != blank -%}
         <h2 class="gift-guide-banner__heading">{{ section.settings.heading | escape }}</h2>
       {%- endif -%}
@@ -106,7 +82,62 @@
       {%- if section.settings.shop_now_label != blank -%}
         <a
           href="{{ section.settings.shop_now_link | default: '#' }}"
-          class="gift-guide-banner__btn gift-guide-banner__btn--black"
+          class="gift-guide-banner__btn gift-guide-banner__btn--black gift-guide-banner__btn--desktop-only"
+        >
+          <span>{{ section.settings.shop_now_label | escape }}</span>
+          <span class="gift-guide-banner__btn-arrow" aria-hidden="true">→</span>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="gift-guide-banner__hero">
+      {%- if section.settings.background_image != blank -%}
+        <picture>
+          {%- if section.settings.background_image_mobile != blank -%}
+            <source
+              media="(max-width: 749px)"
+              srcset="{{ section.settings.background_image_mobile | image_url: width: 1500 }}"
+            >
+          {%- else -%}
+            <source
+              media="(max-width: 749px)"
+              srcset="{{ 'gift-guide-banner-mobile.jpg' | asset_url }}"
+            >
+          {%- endif -%}
+          {{
+            section.settings.background_image
+            | image_url: width: 3840
+            | image_tag:
+              class: 'gift-guide-banner__hero-bg',
+              loading: 'eager',
+              fetchpriority: 'high',
+              widths: '750, 1100, 1500, 2000, 3000, 3840',
+              sizes: '100vw',
+              alt: section.settings.background_image.alt | default: section.settings.heading
+          }}
+        </picture>
+      {%- else -%}
+        <picture>
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ 'gift-guide-banner-mobile.jpg' | asset_url }}"
+          >
+          <img
+            class="gift-guide-banner__hero-bg"
+            src="{{ 'gift-guide-banner.jpg' | asset_url }}"
+            alt="{{ section.settings.heading | escape }}"
+            width="1024"
+            height="389"
+            loading="eager"
+            fetchpriority="high"
+          >
+        </picture>
+      {%- endif -%}
+
+      {%- if section.settings.shop_now_label != blank -%}
+        <a
+          href="{{ section.settings.shop_now_link | default: '#' }}"
+          class="gift-guide-banner__btn gift-guide-banner__btn--black gift-guide-banner__btn--mobile-only"
         >
           <span>{{ section.settings.shop_now_label | escape }}</span>
           <span class="gift-guide-banner__btn-arrow" aria-hidden="true">→</span>

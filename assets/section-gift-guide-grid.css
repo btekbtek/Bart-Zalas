@@ -1,11 +1,11 @@
-/* Gift Guide Grid – standalone styles (no Dawn dependencies) */
+/* Gift Guide Grid – Figma: Lustria for title, Jost for UI */
 
 .gift-guide-grid {
-  --gg-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --gg-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --gg-font-sans: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --gg-font-serif: 'Lustria', Georgia, 'Times New Roman', serif;
   --gg-black: #000000;
   --gg-white: #ffffff;
-  --gg-gray-bg: #d9d9d9;
+  --gg-gray-bg: #f5f5f5;
   --gg-blue: #1a56db;
   --gg-border: #000000;
 
@@ -26,15 +26,16 @@
   padding: 4rem 4rem 5rem;
 }
 
+/* Desktop title */
 .gift-guide-grid__title {
   margin: 0 0 3.2rem;
   font-family: var(--gg-font-serif);
-  font-size: clamp(2.4rem, 3vw, 3.6rem);
-  font-weight: 500;
+  font-size: 3.6rem;
+  font-weight: 400;
   line-height: 1.2;
+  letter-spacing: 0;
 }
 
-/* ── Image grid ── */
 .gift-guide-grid__items {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -83,7 +84,7 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* ── Popup overlay ── */
+/* ── Popup ── */
 .gift-guide-grid__overlay {
   position: fixed;
   inset: 0;
@@ -112,6 +113,7 @@
   padding: 2.4rem;
   background: var(--gg-white);
   border: 1px solid var(--gg-border);
+  border-radius: 0;
   transform: translateY(12px);
   transition: transform 0.3s ease;
 }
@@ -159,20 +161,28 @@
 
 .gift-guide-grid__product-title {
   margin: 0 0 0.4rem;
+  font-family: var(--gg-font-sans);
   font-size: 1.4rem;
   font-weight: 400;
   line-height: 1.3;
+  letter-spacing: 0;
 }
 
+/* Price uses Lustria (serif) per Figma mobile popup */
 .gift-guide-grid__product-price {
   margin: 0 0 0.8rem;
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-family: var(--gg-font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
 }
 
 .gift-guide-grid__product-description {
   margin: 0;
+  font-family: var(--gg-font-sans);
   font-size: 1.2rem;
+  font-weight: 400;
   line-height: 1.45;
   color: #333;
 }
@@ -180,8 +190,9 @@
 .gift-guide-grid__option-label {
   display: block;
   margin: 0 0 0.8rem;
+  font-family: var(--gg-font-sans);
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .gift-guide-grid__option-group {
@@ -198,9 +209,11 @@
   position: relative;
   padding: 1rem 1.2rem 1rem 1.6rem;
   border: 1px solid var(--gg-border);
+  border-radius: 0;
   background: var(--gg-white);
-  font-family: inherit;
+  font-family: var(--gg-font-sans);
   font-size: 1.2rem;
+  font-weight: 400;
   text-align: left;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -228,11 +241,13 @@
   width: 100%;
   padding: 1.2rem 3.6rem 1.2rem 1.2rem;
   border: 1px solid var(--gg-border);
+  border-radius: 0;
   background: var(--gg-white)
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000' d='M1 1l5 5 5-5'/%3E%3C/svg%3E")
     no-repeat right 1.2rem center;
-  font-family: inherit;
+  font-family: var(--gg-font-sans);
   font-size: 1.2rem;
+  font-weight: 400;
   appearance: none;
   cursor: pointer;
 }
@@ -245,12 +260,13 @@
   margin-top: 0.8rem;
   padding: 1.4rem 1.6rem;
   border: 0;
+  border-radius: 0;
   background: var(--gg-black);
   color: var(--gg-white);
-  font-family: inherit;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-family: var(--gg-font-sans);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -291,23 +307,50 @@
 
 /* ── Mobile ── */
 @media screen and (max-width: 749px) {
-  .gift-guide-grid__inner {
-    padding: 3.2rem 2rem 4rem;
+  .gift-guide-grid {
+    background: var(--gg-white);
   }
 
+  .gift-guide-grid__inner {
+    padding: 3.2rem 0 4rem;
+  }
+
+  /* Lustria Regular 36 / 120% */
   .gift-guide-grid__title {
+    max-width: 37.2rem;
+    margin: 0 auto 2.4rem;
+    padding: 0 2rem;
+    font-family: var(--gg-font-serif);
+    font-size: 3.6rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
     text-align: center;
-    margin-bottom: 2.4rem;
   }
 
   .gift-guide-grid__items {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
+    gap: 0.4rem;
+    padding: 0 0.4rem;
   }
 
   .gift-guide-grid__hotspot {
     width: 2.8rem;
     height: 2.8rem;
     font-size: 1.8rem;
+  }
+
+  .gift-guide-grid__popup {
+    max-width: 34rem;
+    padding: 2rem;
+  }
+
+  .gift-guide-grid__product-price {
+    font-size: 1.8rem;
+  }
+
+  .gift-guide-grid__add-btn {
+    justify-content: center;
+    gap: 1.6rem;
   }
 }
