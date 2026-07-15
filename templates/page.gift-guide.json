@@ -16,49 +16,56 @@
     "gift_guide_grid": {
       "type": "gift-guide-grid",
       "settings": {
-        "heading": "Tisso vison in the wild"
+        "heading": "Tisso vison in the wild",
+        "bonus_product": "dark-winter-jacket"
       },
       "blocks": {
         "grid_item_1": {
           "type": "grid_item",
           "settings": {
-            "hotspot_x": 72,
-            "hotspot_y": 68
+            "product": "black-leather-bag",
+            "hotspot_x": 48,
+            "hotspot_y": 70
           }
         },
         "grid_item_2": {
           "type": "grid_item",
           "settings": {
-            "hotspot_x": 45,
-            "hotspot_y": 35
+            "product": "blue-silk-tuxedo",
+            "hotspot_x": 62,
+            "hotspot_y": 48
           }
         },
         "grid_item_3": {
           "type": "grid_item",
           "settings": {
-            "hotspot_x": 30,
-            "hotspot_y": 40
+            "product": "chequered-red-shirt",
+            "hotspot_x": 42,
+            "hotspot_y": 38
           }
         },
         "grid_item_4": {
           "type": "grid_item",
           "settings": {
+            "product": "classic-leather-jacket",
             "hotspot_x": 55,
-            "hotspot_y": 30
+            "hotspot_y": 28
           }
         },
         "grid_item_5": {
           "type": "grid_item",
           "settings": {
-            "hotspot_x": 50,
-            "hotspot_y": 45
+            "product": "classic-varsity-top",
+            "hotspot_x": 58,
+            "hotspot_y": 40
           }
         },
         "grid_item_6": {
           "type": "grid_item",
           "settings": {
-            "hotspot_x": 40,
-            "hotspot_y": 35
+            "product": "silk-summer-top",
+            "hotspot_x": 48,
+            "hotspot_y": 58
           }
         }
       },
