@@ -96,11 +96,23 @@
               ]
             {%- endcapture -%}
 
+            {%- liquid
+              assign short_description = product.metafields.custom.short_description.value
+              if short_description == blank
+                assign short_description = product.metafields.custom.short_description
+              endif
+              if short_description != blank
+                assign short_description = short_description | strip_html | strip
+              else
+                assign short_description = ''
+              endif
+            -%}
+
             {%- capture product_json -%}
               {
                 "id": {{ product.id }},
                 "title": {{ product.title | json }},
-                "description": {{ product.description | strip_html | truncate: 200 | json }},
+                "description": {{ short_description | json }},
                 "price": {{ product.price }},
                 "price_formatted": {{ product.price | money | json }},
                 "featured_image": {{ product.featured_image | image_url: width: 280 | json }},
