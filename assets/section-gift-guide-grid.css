@@ -117,12 +117,13 @@
 .gift-guide-grid__popup {
   position: relative;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   width: 31.1rem;
   max-width: calc(100vw - 3.2rem);
   height: 44.7rem;
   max-height: calc(100vh - 3.2rem);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   padding: 3.6rem 1.7rem 2rem;
   background: #fff;
   border: 0;
@@ -134,6 +135,13 @@
 
 .gift-guide-grid__overlay.is-open .gift-guide-grid__popup {
   transform: translateY(0);
+}
+
+.gift-guide-grid__popup-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .gift-guide-grid__close {
@@ -413,16 +421,17 @@
   outline: none;
 }
 
-/* Desktop ATC: 271 × 45; 64px gap above from size */
+/* ~24px gap so ATC stays fully visible in 447px card */
 .gift-guide-grid__add-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  flex-shrink: 0;
   width: 27.1rem;
   height: 4.5rem;
   max-width: 100%;
-  margin-top: 6.4rem;
+  margin-top: 2.4rem;
   padding: 0 1.6rem;
   border: 0;
   border-radius: 0;
@@ -457,9 +466,15 @@
 }
 
 .gift-guide-grid__message {
+  flex-shrink: 0;
   margin: 1rem 0 0;
   font-size: 1.2rem;
   text-align: center;
+}
+
+.gift-guide-grid__message:empty {
+  display: none;
+  margin: 0;
 }
 
 .gift-guide-grid__message--error {

@@ -143,47 +143,49 @@
         ×
       </button>
 
-      <div class="gift-guide-grid__product-header">
-        <img
-          class="gift-guide-grid__product-thumb"
-          data-gift-guide-product-thumb
-          src=""
-          alt=""
-          width="120"
-          height="140"
-        >
-        <div class="gift-guide-grid__product-info">
-          <h3 class="gift-guide-grid__product-title" id="GiftGuidePopupTitle-{{ section.id }}" data-gift-guide-product-title></h3>
-          <p class="gift-guide-grid__product-price" data-gift-guide-product-price></p>
-          <p class="gift-guide-grid__product-description" data-gift-guide-product-description></p>
-        </div>
-      </div>
-
-      <div class="gift-guide-grid__option-group" data-gift-guide-color-group hidden>
-        <span class="gift-guide-grid__option-label">Color</span>
-        <div class="gift-guide-grid__color-options" data-gift-guide-color-options></div>
-      </div>
-
-      <div class="gift-guide-grid__option-group" data-gift-guide-size-group hidden>
-        <span class="gift-guide-grid__option-label">Size</span>
-        <div class="gift-guide-grid__size-dropdown" data-gift-guide-size-dropdown>
-          <button
-            type="button"
-            class="gift-guide-grid__size-trigger"
-            data-gift-guide-size-trigger
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-label="Choose your size"
+      <div class="gift-guide-grid__popup-body">
+        <div class="gift-guide-grid__product-header">
+          <img
+            class="gift-guide-grid__product-thumb"
+            data-gift-guide-product-thumb
+            src=""
+            alt=""
+            width="120"
+            height="140"
           >
-            <span class="gift-guide-grid__size-label" data-gift-guide-size-label>Choose your size</span>
-            <span class="gift-guide-grid__size-chevron" aria-hidden="true"></span>
-          </button>
-          <ul
-            class="gift-guide-grid__size-list"
-            data-gift-guide-size-list
-            role="listbox"
-            hidden
-          ></ul>
+          <div class="gift-guide-grid__product-info">
+            <h3 class="gift-guide-grid__product-title" id="GiftGuidePopupTitle-{{ section.id }}" data-gift-guide-product-title></h3>
+            <p class="gift-guide-grid__product-price" data-gift-guide-product-price></p>
+            <p class="gift-guide-grid__product-description" data-gift-guide-product-description></p>
+          </div>
+        </div>
+
+        <div class="gift-guide-grid__option-group" data-gift-guide-color-group hidden>
+          <span class="gift-guide-grid__option-label">Color</span>
+          <div class="gift-guide-grid__color-options" data-gift-guide-color-options></div>
+        </div>
+
+        <div class="gift-guide-grid__option-group" data-gift-guide-size-group hidden>
+          <span class="gift-guide-grid__option-label">Size</span>
+          <div class="gift-guide-grid__size-dropdown" data-gift-guide-size-dropdown>
+            <button
+              type="button"
+              class="gift-guide-grid__size-trigger"
+              data-gift-guide-size-trigger
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-label="Choose your size"
+            >
+              <span class="gift-guide-grid__size-label" data-gift-guide-size-label>Choose your size</span>
+              <span class="gift-guide-grid__size-chevron" aria-hidden="true"></span>
+            </button>
+            <ul
+              class="gift-guide-grid__size-list"
+              data-gift-guide-size-list
+              role="listbox"
+              hidden
+            ></ul>
+          </div>
         </div>
       </div>
 
