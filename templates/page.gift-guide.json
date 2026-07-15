@@ -71,9 +71,9 @@
         "grid_item_6": {
           "type": "grid_item",
           "settings": {
-            "product": "silk-summer-top",
-            "hotspot_x": 48,
-            "hotspot_y": 58
+            "product": "dark-denim-top",
+            "hotspot_x": 72,
+            "hotspot_y": 39
           }
         }
       },
