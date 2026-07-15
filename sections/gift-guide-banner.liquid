@@ -6,15 +6,38 @@
   data-gift-guide-banner
   id="GiftGuideBanner-{{ section.id }}"
 >
+  {%- liquid
+    assign logo_alt = section.settings.logo_text | default: 'STREETWEAR' | escape
+    if section.settings.logo != blank
+      assign logo_img = section.settings.logo | image_url: width: 304
+    else
+      assign logo_img = 'gift-guide-logo.png' | asset_url
+    endif
+  -%}
+
   {%- comment -%} Desktop top bar {%- endcomment -%}
   <header class="gift-guide-banner__top-bar">
     <h1 class="gift-guide-banner__logo">
       {%- if section.settings.logo_link != blank -%}
         <a href="{{ section.settings.logo_link }}" class="gift-guide-banner__logo-link">
-          {{ section.settings.logo_text | escape }}
+          <img
+            class="gift-guide-banner__logo-img"
+            src="{{ logo_img }}"
+            alt="{{ logo_alt }}"
+            width="152"
+            height="19"
+            loading="eager"
+          >
         </a>
       {%- else -%}
-        {{ section.settings.logo_text | escape }}
+        <img
+          class="gift-guide-banner__logo-img"
+          src="{{ logo_img }}"
+          alt="{{ logo_alt }}"
+          width="152"
+          height="19"
+          loading="eager"
+        >
       {%- endif -%}
     </h1>
 
@@ -49,7 +72,16 @@
       </span>
       <span class="gift-guide-banner__close-icon" aria-hidden="true">×</span>
     </button>
-    <p class="gift-guide-banner__mobile-logo">{{ section.settings.logo_text | escape }}</p>
+    <p class="gift-guide-banner__mobile-logo">
+      <img
+        class="gift-guide-banner__logo-img"
+        src="{{ logo_img }}"
+        alt="{{ logo_alt }}"
+        width="152"
+        height="19"
+        loading="eager"
+      >
+    </p>
   </header>
 
   {%- comment -%} Mobile CTA strip (tagline + yellow button) {%- endcomment -%}
@@ -189,10 +221,16 @@
       "content": "Header"
     },
     {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Defaults to STREETWEAR logo. Figma size: 151.44 × 19px."
+    },
+    {
       "type": "text",
       "id": "logo_text",
-      "label": "Logo text",
-      "default": "TISSO VISON"
+      "label": "Logo alt text",
+      "default": "STREETWEAR"
     },
     {
       "type": "url",
