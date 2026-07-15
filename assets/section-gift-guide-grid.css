@@ -170,16 +170,17 @@
   min-width: 0;
 }
 
+/* Title: Jost Light 16 / 120% */
 .gift-guide-grid__product-title {
   margin: 0 0 0.4rem;
   font-family: var(--gg-font-sans);
-  font-size: 1.4rem;
-  font-weight: 400;
-  line-height: 1.3;
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.2;
   letter-spacing: 0;
 }
 
-/* Price uses Lustria (serif) per Figma mobile popup */
+/* Price: Lustria Regular 16 / 120% */
 .gift-guide-grid__product-price {
   margin: 0 0 0.8rem;
   font-family: var(--gg-font-serif);
@@ -189,12 +190,14 @@
   letter-spacing: 0;
 }
 
+/* Description: Jost Light 14 / 110%, tracking -1% */
 .gift-guide-grid__product-description {
   margin: 0;
   font-family: var(--gg-font-sans);
-  font-size: 1.2rem;
-  font-weight: 400;
-  line-height: 1.45;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   color: #333;
 }
 
@@ -208,6 +211,11 @@
 
 .gift-guide-grid__option-group {
   margin-bottom: 1.6rem;
+}
+
+/* ~64px between size dropdown and ADD TO CART */
+.gift-guide-grid__option-group[data-gift-guide-size-group] {
+  margin-bottom: 0;
 }
 
 .gift-guide-grid__color-options {
@@ -392,13 +400,17 @@
   outline: none;
 }
 
+/* Desktop ATC: 271 × 45; 64px gap above from size */
 .gift-guide-grid__add-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  margin-top: 0.8rem;
-  padding: 1.4rem 1.6rem;
+  box-sizing: border-box;
+  width: 27.1rem;
+  height: 4.5rem;
+  max-width: 100%;
+  margin-top: 6.4rem;
+  padding: 0 1.6rem;
   border: 0;
   border-radius: 0;
   background: var(--gg-black);
@@ -498,11 +510,8 @@
     height: 14rem;
   }
 
-  .gift-guide-grid__product-price {
-    font-size: 1.8rem;
-  }
-
   .gift-guide-grid__add-btn {
+    width: 100%;
     justify-content: center;
     gap: 1.6rem;
   }
