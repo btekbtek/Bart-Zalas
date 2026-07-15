@@ -1,0 +1,442 @@
+/* Gift Guide Banner – Figma typography: Jost (sans) */
+
+.gift-guide-banner {
+  --gg-font-sans: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --gg-font-serif: 'Lustria', Georgia, 'Times New Roman', serif;
+  --gg-black: #000000;
+  --gg-white: #ffffff;
+  --gg-gray-bar: #f2f2f2;
+  --gg-yellow: #f5e642;
+  --gg-text-muted: #000000;
+
+  font-family: var(--gg-font-sans);
+  color: var(--gg-black);
+  background: var(--gg-white);
+}
+
+.gift-guide-banner *,
+.gift-guide-banner *::before,
+.gift-guide-banner *::after {
+  box-sizing: border-box;
+}
+
+/* ── Desktop top bar ── */
+.gift-guide-banner__top-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 6.4rem;
+  padding: 0 4rem;
+  background: var(--gg-gray-bar);
+}
+
+.gift-guide-banner__logo {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.gift-guide-banner__logo-link {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Figma: 151.44 × 19 */
+.gift-guide-banner__logo-img {
+  display: block;
+  width: 15.144rem;
+  height: 1.9rem;
+  object-fit: contain;
+}
+
+.gift-guide-banner__tagline {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.34;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.gift-guide-banner__top-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Mobile header ── */
+.gift-guide-banner__mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 5.6rem;
+  padding: 0 2rem;
+  background: var(--gg-white);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+}
+
+.gift-guide-banner__menu-btn {
+  position: absolute;
+  left: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--gg-black);
+}
+
+.gift-guide-banner__menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 2.2rem;
+}
+
+.gift-guide-banner__menu-icon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--gg-black);
+}
+
+.gift-guide-banner__close-icon {
+  display: none;
+  font-size: 2.8rem;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.gift-guide-banner__menu-btn.is-open .gift-guide-banner__menu-icon {
+  display: none;
+}
+
+.gift-guide-banner__menu-btn.is-open .gift-guide-banner__close-icon {
+  display: block;
+}
+
+.gift-guide-banner__mobile-logo {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+/* ── Mobile CTA strip ── */
+.gift-guide-banner__mobile-cta {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 2.4rem 2rem;
+  background: var(--gg-gray-bar);
+  text-align: center;
+}
+
+.gift-guide-banner__mobile-tagline {
+  margin: 0;
+  font-family: var(--gg-font-sans);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.34;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+/* ── Buttons — left→right color wipe, 300ms ease-out ── */
+.gift-guide-banner__btn {
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  padding: 1.4rem 2.4rem;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  isolation: isolate;
+  font-family: var(--gg-font-sans);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.28;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 300ms ease-out;
+}
+
+.gift-guide-banner__btn > span {
+  position: relative;
+  z-index: 1;
+}
+
+.gift-guide-banner__btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms ease-out;
+  pointer-events: none;
+}
+
+.gift-guide-banner__btn:hover::before,
+.gift-guide-banner__btn:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.gift-guide-banner__btn-arrow {
+  display: inline-block;
+  font-weight: 300;
+  transition: transform 300ms ease-out;
+}
+
+.gift-guide-banner__btn:hover .gift-guide-banner__btn-arrow,
+.gift-guide-banner__btn:focus-visible .gift-guide-banner__btn-arrow {
+  transform: translateX(6px);
+}
+
+/* Top CTA: yellow base → black slides in L→R — Figma 207 × 44 */
+.gift-guide-banner__btn--yellow {
+  width: 20.7rem;
+  height: 4.4rem;
+  padding: 0 2.4rem;
+  box-sizing: border-box;
+  background: var(--gg-yellow);
+  color: var(--gg-black);
+}
+
+.gift-guide-banner__btn--yellow::before {
+  background: var(--gg-black);
+}
+
+.gift-guide-banner__btn--yellow:hover,
+.gift-guide-banner__btn--yellow:focus-visible {
+  color: var(--gg-white);
+}
+
+/* SHOP NOW: black base → yellow slides in L→R — Figma 220 × 50 */
+.gift-guide-banner__btn--black {
+  width: 22rem;
+  height: 5rem;
+  padding: 0 2.4rem;
+  box-sizing: border-box;
+  background: var(--gg-black);
+  color: var(--gg-white);
+}
+
+.gift-guide-banner__btn--black::before {
+  background: var(--gg-yellow);
+}
+
+.gift-guide-banner__btn--black:hover,
+.gift-guide-banner__btn--black:focus-visible {
+  color: var(--gg-black);
+}
+
+.gift-guide-banner__btn--mobile-only {
+  display: none;
+}
+
+/* ── Stage + intro + hero ── */
+.gift-guide-banner__stage {
+  position: relative;
+  background: var(--gg-white);
+  overflow: hidden;
+}
+
+/* Figma: copy sits bottom-left over the illustration, not vertically centered */
+.gift-guide-banner__intro {
+  position: absolute;
+  z-index: 2;
+  left: clamp(2.4rem, 5vw, 7rem);
+  right: auto;
+  bottom: clamp(3.2rem, 15%, 10.4rem);
+  top: auto;
+  max-width: min(52rem, 46%);
+  transform: none;
+  text-align: left;
+  pointer-events: none;
+}
+
+.gift-guide-banner__intro .gift-guide-banner__btn {
+  pointer-events: auto;
+}
+
+.gift-guide-banner__heading {
+  margin: 0;
+  font-family: var(--gg-font-sans);
+  font-size: clamp(4.8rem, 5vw, 7rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.gift-guide-banner__description {
+  margin: 3.6rem 0 0;
+  max-width: 49rem;
+  font-family: var(--gg-font-sans);
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--gg-text-muted);
+}
+
+.gift-guide-banner__intro .gift-guide-banner__btn--black {
+  margin-top: 2.4rem;
+}
+
+.gift-guide-banner__hero {
+  position: relative;
+  background: var(--gg-white);
+  line-height: 0;
+  overflow: hidden;
+}
+
+/* Two stacked illustration layers — mirrors Figma */
+.gift-guide-banner__hero-stack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.gift-guide-banner__hero-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center top;
+}
+
+.gift-guide-banner__hero-bg--mobile {
+  display: none;
+}
+
+/* ── Bottom bar ── */
+.gift-guide-banner__bottom-bar {
+  padding: 1.6rem 4rem;
+  background: var(--gg-gray-bar);
+  text-align: center;
+}
+
+.gift-guide-banner__bottom-text {
+  margin: 0;
+  font-family: var(--gg-font-sans);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  line-height: 1.342rem;
+  text-align: center;
+}
+
+/* ── Mobile (Figma specs) ── */
+@media screen and (max-width: 749px) {
+  .gift-guide-banner__top-bar {
+    display: none;
+  }
+
+  .gift-guide-banner__mobile-header {
+    display: flex;
+  }
+
+  .gift-guide-banner__mobile-cta {
+    display: flex;
+  }
+
+  .gift-guide-banner__btn--desktop-only {
+    display: none;
+  }
+
+  .gift-guide-banner__btn--mobile-only {
+    display: inline-flex;
+  }
+
+  .gift-guide-banner__stage {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gift-guide-banner__intro {
+    position: static;
+    left: auto;
+    bottom: auto;
+    max-width: none;
+    transform: none;
+    padding: 3.2rem 2.4rem 1.6rem;
+    text-align: center;
+    pointer-events: auto;
+  }
+
+  /* The Gift Guide — Jost Medium 70 / 100% */
+  .gift-guide-banner__heading {
+    font-size: 7rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  /* Description — Jost Regular 20 / 140% */
+  .gift-guide-banner__description {
+    margin: 1.6rem auto 0;
+    max-width: 34rem;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .gift-guide-banner__hero {
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gift-guide-banner__hero-stack {
+    display: none;
+  }
+
+  .gift-guide-banner__hero-bg--mobile {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* SHOP NOW overlays the illustration */
+  .gift-guide-banner__btn--mobile-only {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: 18%;
+    transform: translateX(-50%);
+  }
+
+  .gift-guide-banner__btn--mobile-only:hover,
+  .gift-guide-banner__btn--mobile-only:focus-visible {
+    transform: translateX(-50%);
+  }
+
+  .gift-guide-banner__bottom-bar {
+    padding: 1.2rem 1.6rem;
+  }
+
+  .gift-guide-banner__bottom-text {
+    font-size: 1.6rem;
+    letter-spacing: 0;
+    line-height: 1.342rem;
+  }
+}

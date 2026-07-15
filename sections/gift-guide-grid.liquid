@@ -1,0 +1,312 @@
+{{ 'section-gift-guide-grid.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gift-guide-grid.js' | asset_url }}" defer></script>
+
+{%- assign bonus_product = section.settings.bonus_product -%}
+
+<section
+  class="gift-guide-grid"
+  data-gift-guide-grid
+  id="GiftGuideGrid-{{ section.id }}"
+>
+  {%- if bonus_product != blank -%}
+    <script type="application/json" data-bonus-product-json>
+      {
+        "id": {{ bonus_product.id }},
+        "title": {{ bonus_product.title | json }},
+        "variants": [
+          {%- for variant in bonus_product.variants -%}
+            {
+              "id": {{ variant.id }},
+              "available": {{ variant.available }},
+              "option1": {{ variant.option1 | json }},
+              "option2": {{ variant.option2 | json }},
+              "option3": {{ variant.option3 | json }}
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+  <div class="gift-guide-grid__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="gift-guide-grid__title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="gift-guide-grid__items">
+      {%- for block in section.blocks -%}
+        {%- assign product = block.settings.product -%}
+
+        <article
+          class="gift-guide-grid__item"
+          data-gift-guide-item
+          {{ block.shopify_attributes }}
+        >
+          {%- liquid
+            assign asset_fallback = 'gift-guide-grid-' | append: forloop.index | append: '.jpg'
+          -%}
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 1200
+              | image_tag: class: 'gift-guide-grid__image', loading: 'lazy', widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 750px) 33vw, 50vw'
+            }}
+          {%- elsif product != blank and product.featured_image -%}
+            {{
+              product.featured_image
+              | image_url: width: 1200
+              | image_tag: class: 'gift-guide-grid__image', loading: 'lazy', widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 750px) 33vw, 50vw'
+            }}
+          {%- else -%}
+            <img
+              class="gift-guide-grid__image"
+              src="{{ asset_fallback | asset_url }}"
+              alt=""
+              width="800"
+              height="800"
+              loading="lazy"
+            >
+          {%- endif -%}
+
+          {%- if product != blank -%}
+            {%- capture product_variants_json -%}
+              [
+                {%- for variant in product.variants -%}
+                  {
+                    "id": {{ variant.id }},
+                    "available": {{ variant.available }},
+                    "price": {{ variant.price }},
+                    "price_formatted": {{ variant.price | money | json }},
+                    "option1": {{ variant.option1 | json }},
+                    "option2": {{ variant.option2 | json }},
+                    "option3": {{ variant.option3 | json }}
+                  }{%- unless forloop.last -%},{%- endunless -%}
+                {%- endfor -%}
+              ]
+            {%- endcapture -%}
+
+            {%- capture product_options_json -%}
+              [
+                {%- for option in product.options_with_values -%}
+                  {
+                    "name": {{ option.name | json }},
+                    "position": {{ option.position }},
+                    "values": {{ option.values | json }}
+                  }{%- unless forloop.last -%},{%- endunless -%}
+                {%- endfor -%}
+              ]
+            {%- endcapture -%}
+
+            {%- liquid
+              assign short_description = product.metafields.custom.short_description.value
+              if short_description == blank
+                assign short_description = product.metafields.custom.short_description
+              endif
+              if short_description != blank
+                assign short_description = short_description | strip_html | strip
+              else
+                assign short_description = ''
+              endif
+            -%}
+
+            {%- capture product_json -%}
+              {
+                "id": {{ product.id }},
+                "title": {{ product.title | json }},
+                "description": {{ short_description | json }},
+                "price": {{ product.price }},
+                "price_formatted": {{ product.price | money | json }},
+                "featured_image": {{ product.featured_image | image_url: width: 280 | json }},
+                "options": {{ product_options_json }},
+                "variants": {{ product_variants_json }}
+              }
+            {%- endcapture -%}
+
+            <button
+              type="button"
+              class="gift-guide-grid__hotspot"
+              data-gift-guide-hotspot
+              style="left: {{ block.settings.hotspot_x }}%; top: {{ block.settings.hotspot_y }}%;"
+              aria-label="View {{ product.title | escape }}"
+              aria-expanded="false"
+            >
+              +
+            </button>
+
+            <script type="application/json" data-product-json>
+              {{ product_json }}
+            </script>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- comment -%} Product popup modal {%- endcomment -%}
+  <div
+    class="gift-guide-grid__overlay"
+    data-gift-guide-overlay
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="GiftGuidePopupTitle-{{ section.id }}"
+  >
+    <div class="gift-guide-grid__popup" data-gift-guide-popup>
+      <button type="button" class="gift-guide-grid__close" data-gift-guide-close aria-label="Close popup">
+        ×
+      </button>
+
+      <div class="gift-guide-grid__popup-body">
+        <div class="gift-guide-grid__product-header">
+          <img
+            class="gift-guide-grid__product-thumb"
+            data-gift-guide-product-thumb
+            src=""
+            alt=""
+            width="120"
+            height="140"
+          >
+          <div class="gift-guide-grid__product-info">
+            <h3 class="gift-guide-grid__product-title" id="GiftGuidePopupTitle-{{ section.id }}" data-gift-guide-product-title></h3>
+            <p class="gift-guide-grid__product-price" data-gift-guide-product-price></p>
+            <p class="gift-guide-grid__product-description" data-gift-guide-product-description></p>
+          </div>
+        </div>
+
+        <div class="gift-guide-grid__option-group" data-gift-guide-color-group hidden>
+          <span class="gift-guide-grid__option-label">Color</span>
+          <div class="gift-guide-grid__color-options" data-gift-guide-color-options></div>
+        </div>
+
+        <div class="gift-guide-grid__option-group" data-gift-guide-size-group hidden>
+          <span class="gift-guide-grid__option-label">Size</span>
+          <div class="gift-guide-grid__size-dropdown" data-gift-guide-size-dropdown>
+            <button
+              type="button"
+              class="gift-guide-grid__size-trigger"
+              data-gift-guide-size-trigger
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-label="Choose your size"
+            >
+              <span class="gift-guide-grid__size-label" data-gift-guide-size-label>Choose your size</span>
+              <span class="gift-guide-grid__size-chevron" aria-hidden="true"></span>
+            </button>
+            <ul
+              class="gift-guide-grid__size-list"
+              data-gift-guide-size-list
+              role="listbox"
+              hidden
+            ></ul>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="gift-guide-grid__add-btn" data-gift-guide-add-btn disabled>
+        <span data-gift-guide-add-label>ADD TO CART</span>
+        <span class="gift-guide-grid__add-btn-arrow" aria-hidden="true">→</span>
+      </button>
+
+      <p class="gift-guide-grid__message" data-gift-guide-message></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var section = document.getElementById('GiftGuideGrid-{{ section.id }}');
+    if (!section) return;
+
+    section.querySelectorAll('[data-gift-guide-item]').forEach(function (item) {
+      var jsonEl = item.querySelector('[data-product-json]');
+      var hotspot = item.querySelector('[data-gift-guide-hotspot]');
+      if (!jsonEl || !hotspot) return;
+
+      try {
+        item.setAttribute('data-product', jsonEl.textContent.trim());
+      } catch (error) {
+        console.error('Failed to parse product JSON', error);
+      }
+
+      jsonEl.remove();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Gift Guide Grid",
+  "tag": "section",
+  "class": "section-gift-guide-grid",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tisso vison in the wild"
+    },
+    {
+      "type": "header",
+      "content": "Bonus product"
+    },
+    {
+      "type": "product",
+      "id": "bonus_product",
+      "label": "Soft Winter Jacket",
+      "info": "Automatically added to cart when a product with Black color and Medium size is purchased."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "grid_item",
+      "name": "Grid item",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional. Uses product featured image if empty."
+        },
+        {
+          "type": "range",
+          "id": "hotspot_x",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Hotspot horizontal position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "hotspot_y",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Hotspot vertical position",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Guide Grid",
+      "blocks": [
+        { "type": "grid_item", "settings": { "hotspot_x": 72, "hotspot_y": 68 } },
+        { "type": "grid_item", "settings": { "hotspot_x": 45, "hotspot_y": 35 } },
+        { "type": "grid_item", "settings": { "hotspot_x": 30, "hotspot_y": 40 } },
+        { "type": "grid_item", "settings": { "hotspot_x": 55, "hotspot_y": 30 } },
+        { "type": "grid_item", "settings": { "hotspot_x": 50, "hotspot_y": 45 } },
+        { "type": "grid_item", "settings": { "hotspot_x": 40, "hotspot_y": 35 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

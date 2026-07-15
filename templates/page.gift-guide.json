@@ -1,0 +1,98 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "gift-guide",
+  "sections": {
+    "gift_guide_banner": {
+      "type": "gift-guide-banner",
+      "settings": {
+        "logo_text": "TISSO VISON",
+        "logo_link": "",
+        "tagline": "Find the ideal gift for your loved ones.",
+        "choose_gift_label": "CHOOSE GIFT",
+        "choose_gift_link": "",
+        "heading": "The Gift Guide",
+        "description": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+        "shop_now_label": "SHOP NOW",
+        "shop_now_link": "",
+        "bottom_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+      }
+    },
+    "gift_guide_grid": {
+      "type": "gift-guide-grid",
+      "blocks": {
+        "grid_item_1": {
+          "type": "grid_item",
+          "settings": {
+            "product": "black-leather-bag",
+            "hotspot_x": 61,
+            "hotspot_y": 55
+          }
+        },
+        "grid_item_2": {
+          "type": "grid_item",
+          "settings": {
+            "product": "blue-silk-tuxedo",
+            "hotspot_x": 80,
+            "hotspot_y": 49
+          }
+        },
+        "grid_item_3": {
+          "type": "grid_item",
+          "settings": {
+            "product": "chequered-red-shirt",
+            "hotspot_x": 64,
+            "hotspot_y": 22
+          }
+        },
+        "grid_item_4": {
+          "type": "grid_item",
+          "settings": {
+            "product": "classic-leather-jacket",
+            "hotspot_x": 73,
+            "hotspot_y": 22
+          }
+        },
+        "grid_item_5": {
+          "type": "grid_item",
+          "settings": {
+            "product": "classic-varsity-top",
+            "hotspot_x": 50,
+            "hotspot_y": 26
+          }
+        },
+        "grid_item_6": {
+          "type": "grid_item",
+          "settings": {
+            "product": "dark-denim-top",
+            "hotspot_x": 72,
+            "hotspot_y": 39
+          }
+        }
+      },
+      "block_order": [
+        "grid_item_1",
+        "grid_item_2",
+        "grid_item_3",
+        "grid_item_4",
+        "grid_item_5",
+        "grid_item_6"
+      ],
+      "settings": {
+        "heading": "Tisso vison in the wild",
+        "bonus_product": "dark-winter-jacket"
+      }
+    }
+  },
+  "order": [
+    "gift_guide_banner",
+    "gift_guide_grid"
+  ]
+}

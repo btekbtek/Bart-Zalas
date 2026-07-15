@@ -1,0 +1,319 @@
+{{ 'section-gift-guide-banner.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gift-guide-banner.js' | asset_url }}" defer></script>
+
+<section
+  class="gift-guide-banner"
+  data-gift-guide-banner
+  id="GiftGuideBanner-{{ section.id }}"
+>
+  {%- liquid
+    assign logo_alt = section.settings.logo_text | default: 'TISSO VISION' | escape
+    if section.settings.logo != blank
+      assign logo_img = section.settings.logo | image_url: width: 304
+    else
+      assign logo_img = 'gift-guide-logo.png' | asset_url
+    endif
+  -%}
+
+  {%- comment -%} Desktop top bar {%- endcomment -%}
+  <header class="gift-guide-banner__top-bar">
+    <h1 class="gift-guide-banner__logo">
+      {%- if section.settings.logo_link != blank -%}
+        <a href="{{ section.settings.logo_link }}" class="gift-guide-banner__logo-link">
+          <img
+            class="gift-guide-banner__logo-img"
+            src="{{ logo_img }}"
+            alt="{{ logo_alt }}"
+            width="152"
+            height="19"
+            loading="eager"
+          >
+        </a>
+      {%- else -%}
+        <img
+          class="gift-guide-banner__logo-img"
+          src="{{ logo_img }}"
+          alt="{{ logo_alt }}"
+          width="152"
+          height="19"
+          loading="eager"
+        >
+      {%- endif -%}
+    </h1>
+
+    <p class="gift-guide-banner__tagline">{{ section.settings.tagline | escape }}</p>
+
+    <div class="gift-guide-banner__top-actions">
+      {%- if section.settings.choose_gift_label != blank -%}
+        <a
+          href="{{ section.settings.choose_gift_link | default: '#' }}"
+          class="gift-guide-banner__btn gift-guide-banner__btn--yellow"
+        >
+          <span>{{ section.settings.choose_gift_label | escape }}</span>
+          <span class="gift-guide-banner__btn-arrow" aria-hidden="true">→</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </header>
+
+  {%- comment -%} Mobile header — hamburger / close + centered logo {%- endcomment -%}
+  <header class="gift-guide-banner__mobile-header">
+    <button
+      type="button"
+      class="gift-guide-banner__menu-btn"
+      data-gift-guide-menu
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="gift-guide-banner__menu-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <span class="gift-guide-banner__close-icon" aria-hidden="true">×</span>
+    </button>
+    <p class="gift-guide-banner__mobile-logo">
+      <img
+        class="gift-guide-banner__logo-img"
+        src="{{ logo_img }}"
+        alt="{{ logo_alt }}"
+        width="152"
+        height="19"
+        loading="eager"
+      >
+    </p>
+  </header>
+
+  {%- comment -%} Mobile CTA strip (tagline + yellow button) {%- endcomment -%}
+  <div class="gift-guide-banner__mobile-cta">
+    {%- if section.settings.tagline != blank -%}
+      <p class="gift-guide-banner__mobile-tagline">{{ section.settings.tagline | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.choose_gift_label != blank -%}
+      <a
+        href="{{ section.settings.choose_gift_link | default: '#' }}"
+        class="gift-guide-banner__btn gift-guide-banner__btn--yellow"
+      >
+        <span>{{ section.settings.choose_gift_label | escape }}</span>
+        <span class="gift-guide-banner__btn-arrow" aria-hidden="true">→</span>
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} Stage: intro + illustration (desktop overlays copy on image) {%- endcomment -%}
+  <div class="gift-guide-banner__stage">
+    <div class="gift-guide-banner__intro">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="gift-guide-banner__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="gift-guide-banner__description">{{ section.settings.description | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.shop_now_label != blank -%}
+        <a
+          href="{{ section.settings.shop_now_link | default: '#' }}"
+          class="gift-guide-banner__btn gift-guide-banner__btn--black gift-guide-banner__btn--desktop-only"
+        >
+          <span>{{ section.settings.shop_now_label | escape }}</span>
+          <span class="gift-guide-banner__btn-arrow" aria-hidden="true">→</span>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="gift-guide-banner__hero">
+      {%- liquid
+        assign image_desktop = section.settings.background_image
+        assign image_desktop_2 = section.settings.background_image_secondary
+        assign image_mobile = section.settings.background_image_mobile
+      -%}
+
+      {%- comment -%} Desktop illustration (optional second layer if set in customizer) {%- endcomment -%}
+      <div class="gift-guide-banner__hero-stack" aria-hidden="true">
+        {%- if image_desktop != blank -%}
+          {{
+            image_desktop
+            | image_url: width: 3840
+            | image_tag:
+              class: 'gift-guide-banner__hero-bg gift-guide-banner__hero-bg--desktop',
+              loading: 'eager',
+              fetchpriority: 'high',
+              widths: '1100, 1500, 2000, 3000, 3840',
+              sizes: '100vw',
+              alt: ''
+          }}
+          {%- if image_desktop_2 != blank -%}
+            {{
+              image_desktop_2
+              | image_url: width: 3840
+              | image_tag:
+                class: 'gift-guide-banner__hero-bg gift-guide-banner__hero-bg--desktop',
+                loading: 'eager',
+                widths: '1100, 1500, 2000, 3000, 3840',
+                sizes: '100vw',
+                alt: ''
+            }}
+          {%- endif -%}
+        {%- else -%}
+          <img
+            class="gift-guide-banner__hero-bg gift-guide-banner__hero-bg--desktop"
+            src="{{ 'gift-guide-banner.jpg' | asset_url }}"
+            alt=""
+            width="1024"
+            height="554"
+            loading="eager"
+            fetchpriority="high"
+          >
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Mobile illustration {%- endcomment -%}
+      {%- if image_mobile != blank -%}
+        {{
+          image_mobile
+          | image_url: width: 1500
+          | image_tag:
+            class: 'gift-guide-banner__hero-bg gift-guide-banner__hero-bg--mobile',
+            loading: 'eager',
+            widths: '375, 750, 1100, 1500',
+            sizes: '100vw',
+            alt: section.settings.heading
+        }}
+      {%- else -%}
+        <img
+          class="gift-guide-banner__hero-bg gift-guide-banner__hero-bg--mobile"
+          src="{{ 'gift-guide-banner-mobile.jpg' | asset_url }}"
+          alt="{{ section.settings.heading | escape }}"
+          width="375"
+          height="264"
+          loading="eager"
+        >
+      {%- endif -%}
+
+      {%- if section.settings.shop_now_label != blank -%}
+        <a
+          href="{{ section.settings.shop_now_link | default: '#' }}"
+          class="gift-guide-banner__btn gift-guide-banner__btn--black gift-guide-banner__btn--mobile-only"
+        >
+          <span>{{ section.settings.shop_now_label | escape }}</span>
+          <span class="gift-guide-banner__btn-arrow" aria-hidden="true">→</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.bottom_text != blank -%}
+    <footer class="gift-guide-banner__bottom-bar">
+      <p class="gift-guide-banner__bottom-text">{{ section.settings.bottom_text | escape }}</p>
+    </footer>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Gift Guide Banner",
+  "tag": "section",
+  "class": "section-gift-guide-banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Defaults to TISSO VISION logo. Figma size: 151.44 × 19px."
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo alt text",
+      "default": "TISSO VISION"
+    },
+    {
+      "type": "url",
+      "id": "logo_link",
+      "label": "Logo link"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Center tagline",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "choose_gift_label",
+      "label": "Choose gift button label",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "choose_gift_link",
+      "label": "Choose gift button link"
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Desktop illustration",
+      "info": "Defaults to theme asset if empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_secondary",
+      "label": "Desktop illustration (optional 2nd layer)",
+      "info": "Only use if Figma stacks a second desktop layer."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Mobile illustration",
+      "info": "Defaults to theme mobile asset if empty."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+    },
+    {
+      "type": "text",
+      "id": "shop_now_label",
+      "label": "Shop now button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "shop_now_link",
+      "label": "Shop now button link"
+    },
+    {
+      "type": "header",
+      "content": "Footer bar"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom bar text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Guide Banner"
+    }
+  ]
+}
+{% endschema %}

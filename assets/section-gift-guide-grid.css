@@ -1,0 +1,572 @@
+/* Gift Guide Grid – Figma: Lustria for title, Jost for UI */
+
+.gift-guide-grid {
+  --gg-font-sans: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --gg-font-serif: 'Lustria', Georgia, 'Times New Roman', serif;
+  --gg-black: #000000;
+  --gg-white: #ffffff;
+  --gg-gray-bg: #f5f5f5;
+  --gg-blue: #1a56db;
+  --gg-border: #000000;
+
+  font-family: var(--gg-font-sans);
+  color: var(--gg-black);
+  background: var(--gg-gray-bg);
+}
+
+.gift-guide-grid *,
+.gift-guide-grid *::before,
+.gift-guide-grid *::after {
+  box-sizing: border-box;
+}
+
+/* Same left edge as banner Shop Now / intro: clamp(2.4rem, 5vw, 7rem) */
+.gift-guide-grid__inner {
+  max-width: none;
+  margin: 0;
+  padding: 4rem clamp(2.4rem, 5vw, 7rem) 5rem;
+}
+
+/* Desktop title */
+.gift-guide-grid__title {
+  margin: 0 0 3.2rem;
+  font-family: var(--gg-font-serif);
+  font-size: 3.6rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.gift-guide-grid__items {
+  display: grid;
+  grid-template-columns: repeat(3, 43.3rem);
+  gap: 1.2rem;
+  justify-content: start;
+}
+
+/* Figma tile: 433 × 444, 1.5px black border */
+.gift-guide-grid__item {
+  position: relative;
+  width: 43.3rem;
+  height: 44.4rem;
+  overflow: hidden;
+  background: #c4c4c4;
+  border: 0.15rem solid var(--gg-border);
+}
+
+.gift-guide-grid__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gift-guide-grid__hotspot {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gg-white);
+  color: var(--gg-black);
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.gift-guide-grid__hotspot.is-active {
+  font-size: 1.8rem;
+}
+
+.gift-guide-grid__hotspot:hover,
+.gift-guide-grid__hotspot:focus-visible {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Popup ── */
+.gift-guide-grid__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.gift-guide-grid__overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gift-guide-grid__popup {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 31.1rem;
+  max-width: calc(100vw - 3.2rem);
+  height: 44.7rem;
+  max-height: calc(100vh - 3.2rem);
+  overflow: hidden;
+  padding: 3.6rem 1.7rem 2rem;
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+  transform: translateY(12px);
+  transition: transform 0.3s ease;
+}
+
+.gift-guide-grid__overlay.is-open .gift-guide-grid__popup {
+  transform: translateY(0);
+}
+
+.gift-guide-grid__popup-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Let open size list paint over Add to Cart */
+.gift-guide-grid__popup.is-size-open,
+.gift-guide-grid__popup:has(.gift-guide-grid__size-dropdown.is-open) {
+  overflow: visible;
+}
+
+.gift-guide-grid__popup.is-size-open .gift-guide-grid__popup-body,
+.gift-guide-grid__popup:has(.gift-guide-grid__size-dropdown.is-open) .gift-guide-grid__popup-body {
+  overflow: visible;
+}
+
+.gift-guide-grid__close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--gg-black);
+}
+
+.gift-guide-grid__product-header {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 0.2rem;
+  padding-right: 0.2rem;
+  align-items: flex-start;
+}
+
+.gift-guide-grid__product-thumb {
+  flex-shrink: 0;
+  width: 12rem;
+  height: 14rem;
+  object-fit: cover;
+  background: #eee;
+}
+
+.gift-guide-grid__product-info {
+  min-width: 0;
+}
+
+/* Title: Jost Light 16 / 120% */
+.gift-guide-grid__product-title {
+  margin: 0 0 0.4rem;
+  font-family: var(--gg-font-sans);
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+/* Price: Lustria Regular 16 / 120% */
+.gift-guide-grid__product-price {
+  margin: 0 0 0.8rem;
+  font-family: var(--gg-font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+/* Description: Jost Light 14 / 110%, tracking -1% */
+.gift-guide-grid__product-description {
+  margin: 0;
+  font-family: var(--gg-font-sans);
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #333;
+}
+
+.gift-guide-grid__option-label {
+  display: block;
+  margin: 0 0 0.8rem;
+  font-family: var(--gg-font-sans);
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.gift-guide-grid__option-group {
+  margin-bottom: 0.6rem;
+}
+
+.gift-guide-grid__option-group[data-gift-guide-size-group] {
+  margin-bottom: 0;
+}
+
+.gift-guide-grid__color-options {
+  display: flex;
+  gap: 0;
+  width: 27.1rem;
+  max-width: 100%;
+  height: 4.044rem;
+  border: 1px solid #000;
+}
+
+/* Figma color control: 271 × 40.44 */
+.gift-guide-grid .gift-guide-grid__color-btn {
+  flex: 1 1 0;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  background-color: #fff;
+  color: #000;
+  font-family: var(--gg-font-sans);
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none;
+  transition: background-color 200ms ease-out, color 200ms ease-out;
+}
+
+.gift-guide-grid .gift-guide-grid__color-btn + .gift-guide-grid__color-btn {
+  border-left: 1px solid #000;
+}
+
+/* Always-visible color chip */
+.gift-guide-grid__swatch-chip {
+  display: block;
+  flex: 0 0 1.4rem;
+  width: 1.4rem;
+  align-self: stretch;
+  background-color: var(--swatch-color, #ccc);
+}
+
+.gift-guide-grid__swatch-name {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 0 1.4rem;
+  color: #000;
+  background: transparent;
+  transition: color 200ms ease-out;
+}
+
+/* Selected: black field + white label, color chip stays visible on the left */
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected,
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected:hover,
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected:focus,
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected:focus-visible,
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected:active {
+  background: #000;
+  background-color: #000;
+  color: #fff;
+  outline: none;
+}
+
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected .gift-guide-grid__swatch-name {
+  background: transparent;
+  color: #fff;
+}
+
+.gift-guide-grid .gift-guide-grid__color-btn:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+/* Figma size control: 271 × 40.44 (same as color) */
+.gift-guide-grid__size-dropdown {
+  position: relative;
+  z-index: 1;
+  width: 27.1rem;
+  max-width: 100%;
+}
+
+.gift-guide-grid__size-dropdown.is-open {
+  z-index: 30;
+}
+
+.gift-guide-grid__size-trigger {
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: 100%;
+  height: 4.044rem;
+  min-height: 4.044rem;
+  padding: 0;
+  border: 1px solid var(--gg-border);
+  border-radius: 0;
+  background: var(--gg-white);
+  color: var(--gg-black);
+  font-family: var(--gg-font-sans);
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.gift-guide-grid__size-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 1.4rem;
+}
+
+.gift-guide-grid__size-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 4.044rem;
+  border-left: 1px solid var(--gg-border);
+}
+
+.gift-guide-grid__size-chevron::before {
+  content: '';
+  width: 0.8rem;
+  height: 0.8rem;
+  border-right: 1.5px solid var(--gg-black);
+  border-bottom: 1.5px solid var(--gg-black);
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform 200ms ease-out;
+}
+
+.gift-guide-grid__size-dropdown.is-open .gift-guide-grid__size-chevron::before {
+  transform: rotate(-135deg) translate(-1px, -1px);
+}
+
+.gift-guide-grid__size-list {
+  position: absolute;
+  z-index: 30;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--gg-border);
+  border-top: 0;
+  background: var(--gg-white);
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.12);
+}
+
+.gift-guide-grid__size-list[hidden] {
+  display: none;
+}
+
+.gift-guide-grid__size-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 4.044rem;
+  padding: 1rem 1.2rem;
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid var(--gg-border);
+  background: var(--gg-white);
+  color: var(--gg-black);
+  font-family: var(--gg-font-sans);
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  text-align: center;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.gift-guide-grid__size-option:first-child {
+  border-top: 0;
+}
+
+.gift-guide-grid__size-option:hover,
+.gift-guide-grid__size-option:focus-visible,
+.gift-guide-grid__size-option.is-selected {
+  background: var(--gg-black);
+  color: var(--gg-white);
+  outline: none;
+}
+
+/* ~24px gap so ATC stays fully visible in 447px card */
+.gift-guide-grid__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: 27.1rem;
+  height: 4.5rem;
+  max-width: 100%;
+  margin-top: 2.4rem;
+  padding: 0 1.6rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--gg-black);
+  color: var(--gg-white);
+  font-family: var(--gg-font-sans);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.gift-guide-grid__add-btn:hover:not(:disabled),
+.gift-guide-grid__add-btn:focus-visible:not(:disabled) {
+  background: #222;
+  transform: translateY(-1px);
+}
+
+.gift-guide-grid__add-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gift-guide-grid__add-btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.gift-guide-grid__add-btn:hover:not(:disabled) .gift-guide-grid__add-btn-arrow {
+  transform: translateX(6px);
+}
+
+.gift-guide-grid__message {
+  flex-shrink: 0;
+  margin: 1rem 0 0;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.gift-guide-grid__message:empty {
+  display: none;
+  margin: 0;
+}
+
+.gift-guide-grid__message--error {
+  color: #b00020;
+}
+
+.gift-guide-grid__message--success {
+  color: #0a6640;
+}
+
+/* ── Mobile ── */
+@media screen and (max-width: 749px) {
+  .gift-guide-grid {
+    background: var(--gg-white);
+  }
+
+  .gift-guide-grid__inner {
+    padding: 3.2rem 0 4rem;
+  }
+
+  /* Lustria Regular 36 / 120% */
+  .gift-guide-grid__title {
+    max-width: 37.2rem;
+    margin: 0 auto 2.4rem;
+    padding: 0 2rem;
+    font-family: var(--gg-font-serif);
+    font-size: 3.6rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  .gift-guide-grid__items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+    padding: 0 0.4rem;
+  }
+
+  .gift-guide-grid__item {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 433 / 444;
+  }
+
+  .gift-guide-grid__hotspot {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.6rem;
+  }
+
+  .gift-guide-grid__popup {
+    width: 31.1rem;
+    height: 44.7rem;
+    max-width: calc(100vw - 2.4rem);
+    padding: 3.6rem 1.7rem 2rem;
+  }
+
+  .gift-guide-grid__product-thumb {
+    width: 12rem;
+    height: 14rem;
+  }
+
+  .gift-guide-grid__add-btn {
+    width: 100%;
+    justify-content: center;
+    gap: 1.6rem;
+  }
+}
