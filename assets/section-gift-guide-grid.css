@@ -202,50 +202,74 @@
 .gift-guide-grid__color-options {
   display: flex;
   gap: 0;
-  border: 1px solid var(--gg-border);
+  width: 100%;
+  border: 1px solid #000;
 }
 
-.gift-guide-grid__color-btn {
-  flex: 1;
+.gift-guide-grid .gift-guide-grid__color-btn {
+  flex: 1 1 0;
+  display: flex;
+  align-items: stretch;
   position: relative;
   margin: 0;
-  padding: 1.2rem 1.2rem 1.2rem 2.4rem;
+  padding: 0;
+  min-height: 4.4rem;
   border: 0;
   border-radius: 0;
-  background-color: var(--gg-white);
-  color: var(--gg-black);
+  background: #fff;
+  background-color: #fff;
+  color: #000;
   font-family: var(--gg-font-sans);
   font-size: 1.4rem;
   font-weight: 400;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  box-shadow: none;
 }
 
-.gift-guide-grid__color-btn + .gift-guide-grid__color-btn {
-  border-left: 1px solid var(--gg-border);
+.gift-guide-grid .gift-guide-grid__color-btn + .gift-guide-grid__color-btn {
+  border-left: 1px solid #000;
 }
 
-/* Selected: white field + left color strip (never fill the whole button black) */
-.gift-guide-grid__color-btn.is-selected {
-  background-color: var(--gg-white);
-  color: var(--gg-black);
+/* Always-visible color chip (Figma: thick vertical swatch) */
+.gift-guide-grid__swatch-chip {
+  display: block;
+  flex: 0 0 1.4rem;
+  width: 1.4rem;
+  align-self: stretch;
+  background-color: var(--swatch-color, #ccc);
 }
 
-.gift-guide-grid__color-btn.is-selected::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0.6rem;
-  background-color: var(--swatch-color, var(--gg-blue));
+.gift-guide-grid__swatch-name {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 1.2rem 1.4rem;
+  color: #000;
+  background: #fff;
 }
 
-.gift-guide-grid__color-btn:focus-visible {
-  outline: 2px solid var(--gg-black);
+/* Selected keeps white field + color chip — never invert to black fill */
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected,
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected:hover,
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected:focus,
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected:focus-visible,
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected:active {
+  background: #fff;
+  background-color: #fff;
+  color: #000;
+  outline: none;
+}
+
+.gift-guide-grid .gift-guide-grid__color-btn.is-selected .gift-guide-grid__swatch-name {
+  background: #fff;
+  color: #000;
+}
+
+.gift-guide-grid .gift-guide-grid__color-btn:focus-visible {
+  outline: 2px solid #000;
   outline-offset: -2px;
   z-index: 1;
 }

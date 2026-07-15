@@ -297,21 +297,36 @@
       var button = document.createElement('button');
       button.type = 'button';
       button.className = 'gift-guide-grid__color-btn';
-      button.textContent = value;
       button.setAttribute('data-color-value', value);
-      /* Left strip uses the actual color name when selected (Blue → blue, Black → #000) */
       button.style.setProperty('--swatch-color', self.resolveSwatchColor(value));
+
+      var chip = document.createElement('span');
+      chip.className = 'gift-guide-grid__swatch-chip';
+      chip.setAttribute('aria-hidden', 'true');
+      chip.style.backgroundColor = self.resolveSwatchColor(value);
+
+      var name = document.createElement('span');
+      name.className = 'gift-guide-grid__swatch-name';
+      name.textContent = value;
+
+      button.appendChild(chip);
+      button.appendChild(name);
 
       if (index === 0) {
         button.classList.add('is-selected');
+        button.setAttribute('aria-pressed', 'true');
         self.selectedColor = value;
+      } else {
+        button.setAttribute('aria-pressed', 'false');
       }
 
       button.addEventListener('click', function () {
         self.colorOptionsEl.querySelectorAll('.gift-guide-grid__color-btn').forEach(function (btn) {
           btn.classList.remove('is-selected');
+          btn.setAttribute('aria-pressed', 'false');
         });
         button.classList.add('is-selected');
+        button.setAttribute('aria-pressed', 'true');
         self.selectedColor = value;
         self.renderSizeOptions();
         self.updateAddButton();
@@ -329,17 +344,17 @@
   GiftGuideGrid.prototype.resolveSwatchColor = function (name) {
     var key = String(name || '').toLowerCase().trim();
     var map = {
-      blue: '#1a56db',
+      blue: '#2563eb',
       black: '#000000',
-      white: '#e8e8e8',
-      red: '#c62828',
-      green: '#2e7d32',
-      navy: '#1a237e',
-      grey: '#9e9e9e',
-      gray: '#9e9e9e',
+      white: '#f3f3f3',
+      red: '#b91c1c',
+      green: '#15803d',
+      navy: '#1e3a8a',
+      grey: '#9ca3af',
+      gray: '#9ca3af',
     };
 
-    return map[key] || key || '#1a56db';
+    return map[key] || '#9ca3af';
   };
 
   GiftGuideGrid.prototype.renderSizeOptions = function () {
