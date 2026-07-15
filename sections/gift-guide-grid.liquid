@@ -103,7 +103,7 @@
                 "description": {{ product.description | strip_html | truncate: 200 | json }},
                 "price": {{ product.price }},
                 "price_formatted": {{ product.price | money | json }},
-                "featured_image": {{ product.featured_image | image_url: width: 200 | json }},
+                "featured_image": {{ product.featured_image | image_url: width: 280 | json }},
                 "options": {{ product_options_json }},
                 "variants": {{ product_variants_json }}
               }
@@ -148,8 +148,8 @@
           data-gift-guide-product-thumb
           src=""
           alt=""
-          width="80"
-          height="80"
+          width="120"
+          height="140"
         >
         <div class="gift-guide-grid__product-info">
           <h3 class="gift-guide-grid__product-title" id="GiftGuidePopupTitle-{{ section.id }}" data-gift-guide-product-title></h3>

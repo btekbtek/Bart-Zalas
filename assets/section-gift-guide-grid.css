@@ -106,14 +106,18 @@
 
 .gift-guide-grid__popup {
   position: relative;
-  width: 100%;
-  max-width: 36rem;
-  max-height: 90vh;
+  box-sizing: border-box;
+  width: 31.1rem;
+  max-width: calc(100vw - 3.2rem);
+  height: 44.7rem;
+  max-height: calc(100vh - 3.2rem);
+  overflow-x: hidden;
   overflow-y: auto;
-  padding: 2.4rem;
-  background: var(--gg-white);
-  border: 1px solid var(--gg-border);
+  padding: 3.6rem 1.7rem 2rem;
+  background: #fff;
+  border: 0;
   border-radius: 0;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
   transform: translateY(12px);
   transition: transform 0.3s ease;
 }
@@ -142,15 +146,16 @@
 
 .gift-guide-grid__product-header {
   display: flex;
-  gap: 1.6rem;
+  gap: 1.2rem;
   margin-bottom: 2rem;
   padding-right: 2rem;
+  align-items: flex-start;
 }
 
 .gift-guide-grid__product-thumb {
   flex-shrink: 0;
-  width: 8rem;
-  height: 8rem;
+  width: 12rem;
+  height: 14rem;
   object-fit: cover;
   background: #eee;
 }
@@ -470,8 +475,15 @@
   }
 
   .gift-guide-grid__popup {
-    max-width: 34rem;
-    padding: 2rem;
+    width: 31.1rem;
+    height: 44.7rem;
+    max-width: calc(100vw - 2.4rem);
+    padding: 3.6rem 1.7rem 2rem;
+  }
+
+  .gift-guide-grid__product-thumb {
+    width: 12rem;
+    height: 14rem;
   }
 
   .gift-guide-grid__product-price {
