@@ -230,6 +230,7 @@
   GiftGuideGrid.prototype.openSizeDropdown = function () {
     if (!this.sizeDropdown) return;
     this.sizeDropdown.classList.add('is-open');
+    if (this.popup) this.popup.classList.add('is-size-open');
     this.sizeList.hidden = false;
     this.sizeTrigger.setAttribute('aria-expanded', 'true');
   };
@@ -237,6 +238,7 @@
   GiftGuideGrid.prototype.closeSizeDropdown = function () {
     if (!this.sizeDropdown) return;
     this.sizeDropdown.classList.remove('is-open');
+    if (this.popup) this.popup.classList.remove('is-size-open');
     this.sizeList.hidden = true;
     this.sizeTrigger.setAttribute('aria-expanded', 'false');
   };

@@ -144,6 +144,17 @@
   overflow-y: auto;
 }
 
+/* Let open size list paint over Add to Cart */
+.gift-guide-grid__popup.is-size-open,
+.gift-guide-grid__popup:has(.gift-guide-grid__size-dropdown.is-open) {
+  overflow: visible;
+}
+
+.gift-guide-grid__popup.is-size-open .gift-guide-grid__popup-body,
+.gift-guide-grid__popup:has(.gift-guide-grid__size-dropdown.is-open) .gift-guide-grid__popup-body {
+  overflow: visible;
+}
+
 .gift-guide-grid__close {
   position: absolute;
   top: 1.2rem;
@@ -165,8 +176,8 @@
 .gift-guide-grid__product-header {
   display: flex;
   gap: 1.2rem;
-  margin-bottom: 1.2rem;
-  padding-right: 2rem;
+  margin-bottom: 0.2rem;
+  padding-right: 0.2rem;
   align-items: flex-start;
 }
 
@@ -222,10 +233,9 @@
 }
 
 .gift-guide-grid__option-group {
-  margin-bottom: 1.6rem;
+  margin-bottom: 0.6rem;
 }
 
-/* ~64px between size dropdown and ADD TO CART */
 .gift-guide-grid__option-group[data-gift-guide-size-group] {
   margin-bottom: 0;
 }
@@ -317,8 +327,13 @@
 /* Figma size control: 271 × 40.44 (same as color) */
 .gift-guide-grid__size-dropdown {
   position: relative;
+  z-index: 1;
   width: 27.1rem;
   max-width: 100%;
+}
+
+.gift-guide-grid__size-dropdown.is-open {
+  z-index: 30;
 }
 
 .gift-guide-grid__size-trigger {
@@ -377,7 +392,7 @@
 
 .gift-guide-grid__size-list {
   position: absolute;
-  z-index: 5;
+  z-index: 30;
   top: 100%;
   left: 0;
   right: 0;
@@ -387,6 +402,7 @@
   border: 1px solid var(--gg-border);
   border-top: 0;
   background: var(--gg-white);
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.12);
 }
 
 .gift-guide-grid__size-list[hidden] {
@@ -435,6 +451,8 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
   width: 27.1rem;
   height: 4.5rem;
