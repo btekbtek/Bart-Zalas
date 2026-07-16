@@ -431,9 +431,9 @@
     text-overflow: ellipsis;
   }
 
-  /* The Gift Guide — Jost Medium 70 / 100% (mobile layout) */
+  /* The Gift Guide — mobile */
   .gift-guide-banner__heading {
-    font-size: 7rem;
+    font-size: 3rem;
     font-weight: 500;
     line-height: 1;
     letter-spacing: 0;
