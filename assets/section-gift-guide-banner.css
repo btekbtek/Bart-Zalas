@@ -312,6 +312,10 @@
   color: var(--gg-text-muted);
 }
 
+.gift-guide-banner__description--mobile {
+  display: none;
+}
+
 .gift-guide-banner__intro .gift-guide-banner__btn--black {
   margin-top: 2.4rem;
 }
@@ -392,7 +396,7 @@
     flex-direction: column;
   }
 
-  /* Mobile: title → copy → sustainable line → image */
+  /* Mobile: title → copy → image/Shop Now → sustainable line */
   .gift-guide-banner__intro {
     position: static;
     left: auto;
@@ -405,8 +409,16 @@
     order: 1;
   }
 
-  .gift-guide-banner__bottom-bar {
+  .gift-guide-banner__hero {
     order: 2;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gift-guide-banner__bottom-bar {
+    order: 3;
     padding: 1.2rem 1.6rem;
   }
 
@@ -419,15 +431,7 @@
     text-overflow: ellipsis;
   }
 
-  .gift-guide-banner__hero {
-    order: 3;
-    min-height: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* The Gift Guide — Jost Medium 70 / 100% */
+  /* The Gift Guide — Jost Medium 70 / 100% (mobile layout) */
   .gift-guide-banner__heading {
     font-size: 7rem;
     font-weight: 500;
@@ -435,7 +439,15 @@
     letter-spacing: 0;
   }
 
-  /* Description — Jost Regular 20 / 140% */
+  /* Description — Jost Regular 20 / 140%; shorter mobile copy */
+  .gift-guide-banner__description--desktop {
+    display: none;
+  }
+
+  .gift-guide-banner__description--mobile {
+    display: block;
+  }
+
   .gift-guide-banner__description {
     margin: 1.6rem auto 0;
     max-width: 34rem;

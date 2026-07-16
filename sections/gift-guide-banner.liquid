@@ -107,8 +107,17 @@
         <h2 class="gift-guide-banner__heading">{{ section.settings.heading | escape }}</h2>
       {%- endif -%}
 
-      {%- if section.settings.description != blank -%}
-        <p class="gift-guide-banner__description">{{ section.settings.description | escape }}</p>
+      {%- liquid
+        assign description_desktop = section.settings.description
+        assign description_mobile = section.settings.description_mobile | default: description_desktop
+      -%}
+      {%- if description_desktop != blank or description_mobile != blank -%}
+        {%- if description_desktop != blank -%}
+          <p class="gift-guide-banner__description gift-guide-banner__description--desktop">{{ description_desktop | escape }}</p>
+        {%- endif -%}
+        {%- if description_mobile != blank -%}
+          <p class="gift-guide-banner__description gift-guide-banner__description--mobile">{{ description_mobile | escape }}</p>
+        {%- endif -%}
       {%- endif -%}
 
       {%- if section.settings.shop_now_label != blank -%}
@@ -285,8 +294,15 @@
     {
       "type": "textarea",
       "id": "description",
-      "label": "Description",
+      "label": "Description (desktop)",
       "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+    },
+    {
+      "type": "textarea",
+      "id": "description_mobile",
+      "label": "Description (mobile)",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination.",
+      "info": "Shorter copy for small screens. Falls back to desktop description if empty."
     },
     {
       "type": "text",
