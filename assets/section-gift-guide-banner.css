@@ -132,19 +132,20 @@
   line-height: 0;
 }
 
-/* ── Mobile CTA strip ── */
+/* ── Mobile CTA strip — shown when menu is open ── */
 .gift-guide-banner__mobile-cta {
   display: none;
   flex-direction: column;
   align-items: center;
   gap: 1.6rem;
-  padding: 2.4rem 2rem;
+  padding: 2.4rem 2rem 3.2rem;
   background: var(--gg-gray-bar);
   text-align: center;
 }
 
 .gift-guide-banner__mobile-tagline {
   margin: 0;
+  max-width: 28rem;
   font-family: var(--gg-font-sans);
   font-size: 1.6rem;
   font-weight: 400;
@@ -254,8 +255,23 @@
 /* ── Stage + intro + hero ── */
 .gift-guide-banner__stage {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: var(--gg-white);
   overflow: hidden;
+}
+
+/* Desktop: bar below hero; intro overlays hero */
+.gift-guide-banner__intro {
+  order: 1;
+}
+
+.gift-guide-banner__hero {
+  order: 2;
+}
+
+.gift-guide-banner__bottom-bar {
+  order: 3;
 }
 
 /* Figma: copy sits bottom-left over the illustration, not vertically centered */
@@ -354,7 +370,12 @@
     display: flex;
   }
 
+  /* Tagline + CHOOSE GIFT only when menu is open (Figma ~375×180) */
   .gift-guide-banner__mobile-cta {
+    display: none;
+  }
+
+  .gift-guide-banner.is-menu-open .gift-guide-banner__mobile-cta {
     display: flex;
   }
 
@@ -371,6 +392,7 @@
     flex-direction: column;
   }
 
+  /* Mobile: title → copy → sustainable line → image */
   .gift-guide-banner__intro {
     position: static;
     left: auto;
@@ -380,6 +402,29 @@
     padding: 3.2rem 2.4rem 1.6rem;
     text-align: center;
     pointer-events: auto;
+    order: 1;
+  }
+
+  .gift-guide-banner__bottom-bar {
+    order: 2;
+    padding: 1.2rem 1.6rem;
+  }
+
+  .gift-guide-banner__bottom-text {
+    font-size: 1.4rem;
+    letter-spacing: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gift-guide-banner__hero {
+    order: 3;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* The Gift Guide — Jost Medium 70 / 100% */
@@ -397,13 +442,6 @@
     font-size: 2rem;
     font-weight: 400;
     line-height: 1.4;
-  }
-
-  .gift-guide-banner__hero {
-    min-height: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .gift-guide-banner__hero-stack {
@@ -428,15 +466,5 @@
   .gift-guide-banner__btn--mobile-only:hover,
   .gift-guide-banner__btn--mobile-only:focus-visible {
     transform: translateX(-50%);
-  }
-
-  .gift-guide-banner__bottom-bar {
-    padding: 1.2rem 1.6rem;
-  }
-
-  .gift-guide-banner__bottom-text {
-    font-size: 1.6rem;
-    letter-spacing: 0;
-    line-height: 1.342rem;
   }
 }

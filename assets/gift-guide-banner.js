@@ -16,6 +16,7 @@
 
     menuBtn.addEventListener('click', function () {
       var isOpen = menuBtn.classList.toggle('is-open');
+      section.classList.toggle('is-menu-open', isOpen);
       menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       menuBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     });

@@ -122,6 +122,12 @@
       {%- endif -%}
     </div>
 
+    {%- if section.settings.bottom_text != blank -%}
+      <footer class="gift-guide-banner__bottom-bar">
+        <p class="gift-guide-banner__bottom-text">{{ section.settings.bottom_text | escape }}</p>
+      </footer>
+    {%- endif -%}
+
     <div class="gift-guide-banner__hero">
       {%- liquid
         assign image_desktop = section.settings.background_image
@@ -202,12 +208,6 @@
       {%- endif -%}
     </div>
   </div>
-
-  {%- if section.settings.bottom_text != blank -%}
-    <footer class="gift-guide-banner__bottom-bar">
-      <p class="gift-guide-banner__bottom-text">{{ section.settings.bottom_text | escape }}</p>
-    </footer>
-  {%- endif -%}
 </section>
 
 {% schema %}
@@ -307,7 +307,7 @@
       "type": "text",
       "id": "bottom_text",
       "label": "Bottom bar text",
-      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+      "default": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
     }
   ],
   "presets": [

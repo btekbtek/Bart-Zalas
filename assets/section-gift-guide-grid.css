@@ -521,13 +521,13 @@
     padding: 3.2rem 0 4rem;
   }
 
-  /* Lustria Regular 36 / 120% */
+  /* Lustria Regular 24 / 120% */
   .gift-guide-grid__title {
     max-width: 37.2rem;
     margin: 0 auto 2.4rem;
     padding: 0 2rem;
     font-family: var(--gg-font-serif);
-    font-size: 3.6rem;
+    font-size: 2.4rem;
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: 0;
